@@ -1,11 +1,15 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, Dimensions, StyleSheet, Text, View } from 'react-native';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Height: {height}</Text>
+      <Text>Width: {width}</Text>
       <Button title="Go to previous page" onPress={() => router.back()} />
     </View>
   );
