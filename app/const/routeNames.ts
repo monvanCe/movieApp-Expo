@@ -1,5 +1,5 @@
 export const onboarding = 'onboarding';
-export const bottomTabs = '(tabs)';
+export const bottomTabs = 'lists';
 export const profile = 'profile';
 export const search = 'search';
 export const lists = 'lists';
