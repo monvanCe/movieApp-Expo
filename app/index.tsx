@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
+import { onboarding } from './const/routeNames';
 
 export default function Page() {
   const [count, setCount] = React.useState(0);
@@ -27,7 +28,7 @@ export default function Page() {
         <Text style={styles.subtitle}>This is the first page of your app.</Text>
         <Text>Count: {count}</Text>
         <Text>Your IP: {ip}</Text>
-        <Button title="Go to home" onPress={() => router.push('home')} />
+        <Button title="Go to home" onPress={() => router.push(onboarding)} />
       </View>
     </View>
   );
