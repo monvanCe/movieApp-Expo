@@ -12,7 +12,6 @@ function Page() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.currentUser);
 
-  // Update count every second
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCount((prev) => prev + 1);
@@ -51,7 +50,7 @@ function Page() {
         <Button title="Go to home" onPress={() => router.push(onboarding)} />
         <Button title="Set user" onPress={setUser} />
         <Text>
-          User Name: {user?.name} {user?.surname}{' '}
+          User Name: {user?.name} {user?.surname}
         </Text>
       </View>
     </View>

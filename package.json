@@ -7,8 +7,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "update": "npm install expo@latest",
-    "updateD": "npx expo install --fix"
+    "update-expo": "npm install expo@latest",
+    "update-depencies": "npx expo install --fix",
+    "eas-update": "eas update"
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
