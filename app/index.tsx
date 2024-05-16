@@ -1,10 +1,11 @@
 import { router } from 'expo-router';
 import React, { useEffect } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { onboarding } from './const/routeNames';
 import { store, useAppDispatch, useAppSelector } from './store/store';
 import { setCurrentUser } from './store/userSlice';
 import { Provider } from 'react-redux';
+import Button from './components/atoms/button';
 
 function Page() {
   const [count, setCount] = React.useState(0);
@@ -47,8 +48,8 @@ function Page() {
         <Text style={styles.subtitle}>This is the first page of your app.</Text>
         <Text>Count: {count}</Text>
         <Text>Your IP: {ip}</Text>
-        <Button title="Go to home" onPress={() => router.push(onboarding)} />
-        <Button title="Set user" onPress={setUser} />
+        <Button text="Go to home" onPress={() => router.push(onboarding)} />
+        <Button text="Set user" onPress={setUser} />
         <Text>
           User Name: {user?.name} {user?.surname}
         </Text>

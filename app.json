@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#000"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.monvance.movieApp"
@@ -27,7 +29,9 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router"
+    ],
     "scheme": "your-app-scheme",
     "extra": {
       "router": {
@@ -42,6 +46,7 @@
     },
     "updates": {
       "url": "https://u.expo.dev/9cb0c9d3-79d1-4a50-820a-00b7171cd879"
-    }
+    },
+    "owner": "monvance"
   }
 }
