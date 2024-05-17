@@ -6,7 +6,6 @@ export const nowPlayingApi = `${baseUrl}/movie/now_playing?api_key=${apiKey}${op
 export const popularApi = `${baseUrl}/movie/popular?api_key=${apiKey}${options}`;
 export const topRatedApi = `${baseUrl}/movie/top_rated?api_key=${apiKey}${options}`;
 export const upComingApi = `${baseUrl}/movie/upcoming?api_key=${apiKey}${options}`;
-export const trendingApi = `${baseUrl}/trending/all/day?api_key=${apiKey}`;
 
 export const lowResImage = (path: string) =>
   `https://image.tmdb.org/t/p/w200${path}`;

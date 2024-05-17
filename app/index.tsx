@@ -1,13 +1,12 @@
 import { router } from 'expo-router';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { onboarding } from './const/routeNames';
-import { store, useAppDispatch, useAppSelector } from './store/store';
-import { setCurrentUser } from './store/userSlice';
-import { Provider } from 'react-redux';
-import Button from './components/atoms/button';
+import { useAppDispatch, useAppSelector } from '../src/store/store';
+import { setCurrentUser } from '../src/store/userSlice';
+import Button from '../src/components/atoms/button';
+import { bottomTabs } from '../src/const/routeNames';
 
-function Page() {
+export default function () {
   const [count, setCount] = React.useState(0);
   const [ip, setIp] = React.useState('');
   const dispatch = useAppDispatch();
@@ -32,10 +31,7 @@ function Page() {
       .then((data) => data.results[0]);
 
     const formattedUser = {
-      id: randomUser.login.uuid,
-      name: randomUser.name.first,
-      surname: randomUser.name.last,
-      email: randomUser.email,
+      username: randomUser.login.username,
     };
 
     dispatch(setCurrentUser(formattedUser));
@@ -48,11 +44,9 @@ function Page() {
         <Text style={styles.subtitle}>This is the first page of your app.</Text>
         <Text>Count: {count}</Text>
         <Text>Your IP: {ip}</Text>
-        <Button text="Go to home" onPress={() => router.push(onboarding)} />
+        <Button text="Go to bottom" onPress={() => router.push(bottomTabs)} />
         <Button text="Set user" onPress={setUser} />
-        <Text>
-          User Name: {user?.name} {user?.surname}
-        </Text>
+        <Text>User Name: {user?.username || 'No user set'}</Text>
       </View>
     </View>
   );
@@ -79,11 +73,3 @@ const styles = StyleSheet.create({
     color: '#38434D',
   },
 });
-
-const WrappedPage = () => (
-  <Provider store={store}>
-    <Page />
-  </Provider>
-);
-
-export default WrappedPage;

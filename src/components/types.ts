@@ -1,4 +1,4 @@
-export interface buttonI {
+export interface IButton {
   text: string;
   onPress: () => void;
 }

@@ -1,4 +1,3 @@
-export const onboarding = 'onboarding';
 export const bottomTabs = 'lists';
 export const profile = 'profile';
 export const search = 'search';
