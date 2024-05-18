@@ -1,75 +1,37 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { useAppDispatch, useAppSelector } from '../src/store/store';
-import { setCurrentUser } from '../src/store/userSlice';
+import { StyleSheet, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlashList } from '@shopify/flash-list';
+
+import { useAppSelector } from '../src/store/store';
 import Button from '../src/components/atoms/button';
 import { bottomTabs } from '../src/const/routeNames';
+import { fetchBannerMovies } from '../src/actions/fetchBannerMovies';
 
 export default function () {
-  const [count, setCount] = React.useState(0);
-  const [ip, setIp] = React.useState('');
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.auth.currentUser);
-
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      setCount((prev) => prev + 1);
-    }, 1000);
-
-    // Fetch IP address
-    fetch('https://api.ipify.org?format=json')
-      .then((res) => res.json())
-      .then((data) => setIp(data.ip));
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const setUser = async () => {
-    const randomUser = await fetch('https://randomuser.me/api/')
-      .then((res) => res.json())
-      .then((data) => data.results[0]);
-
-    const formattedUser = {
-      username: randomUser.login.username,
-    };
-
-    dispatch(setCurrentUser(formattedUser));
-  };
+  const popular = useAppSelector((state) => state.movies.popular);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-        <Text>Count: {count}</Text>
-        <Text>Your IP: {ip}</Text>
-        <Button text="Go to bottom" onPress={() => router.push(bottomTabs)} />
-        <Button text="Set user" onPress={setUser} />
-        <Text>User Name: {user?.username || 'No user set'}</Text>
-      </View>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Button
+        text="Go to Bottom Tabs"
+        onPress={() => router.push(bottomTabs)}
+      />
+      <Button text="Fetch Banner Movies" onPress={fetchBannerMovies} />
+      <FlashList
+        data={popular}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <Text>{item.title}</Text>}
+        estimatedItemSize={30}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: 'center',
-    maxWidth: 960,
-    marginHorizontal: 'auto',
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: 'bold',
-  },
-  subtitle: {
-    fontSize: 36,
-    color: '#38434D',
+    backgroundColor: '#8312a5',
   },
 });

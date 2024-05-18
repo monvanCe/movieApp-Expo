@@ -4,24 +4,25 @@ import {
   upComingApi,
   nowPlayingApi,
 } from '../const/api';
+import { getRequest } from '../service/config';
 import {
   setNowPlayingMovies,
   setPopularMovies,
   setTopRatedMovies,
   setUpComingMovies,
-} from '../store/bannerMoviesSlice';
-import { useAppDispatch } from '../store/store';
-
-const dispatch = useAppDispatch();
+} from '../store/moviesSlice';
+import { store } from '../store/store';
 
 export const fetchBannerMovies = async () => {
-  const popular = await fetch(popularApi).then((res) => res.json());
-  const topRated = await fetch(topRatedApi).then((res) => res.json());
-  const upComing = await fetch(upComingApi).then((res) => res.json());
-  const nowPlaying = await fetch(nowPlayingApi).then((res) => res.json());
+  const dispatch = store.dispatch;
 
+  const nowPlaying: any = await getRequest('external', nowPlayingApi);
+  const popular: any = await getRequest('external', popularApi);
+  const topRated: any = await getRequest('external', topRatedApi);
+  const upComing: any = await getRequest('external', upComingApi);
+
+  dispatch(setNowPlayingMovies(nowPlaying.results));
   dispatch(setPopularMovies(popular.results));
   dispatch(setTopRatedMovies(topRated.results));
   dispatch(setUpComingMovies(upComing.results));
-  dispatch(setNowPlayingMovies(nowPlaying.results));
 };
