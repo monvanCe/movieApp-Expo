@@ -1,5 +1,8 @@
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 import { Stack } from 'expo-router/stack';
 import { Provider } from 'react-redux';
+
 import { store } from '../src/store/store';
 
 function AppLayout() {

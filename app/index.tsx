@@ -1,16 +1,20 @@
 import { router } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FlashList } from '@shopify/flash-list';
 
-import { useAppSelector } from '../src/store/store';
 import Button from '../src/components/atoms/button';
 import { bottomTabs } from '../src/const/routeNames';
-import { fetchBannerMovies } from '../src/actions/fetchBannerMovies';
+import { originalImage } from '../src/const/imageURLs';
+import { MotiView } from 'moti';
+import { MotiPressable } from 'moti/interactions';
 
 export default function () {
-  const popular = useAppSelector((state) => state.movies.popular);
+  const [height, setHeight] = React.useState<number>(100);
+
+  const toggleHeight = () => {
+    setHeight(height === 100 ? 200 : 100);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,13 +22,21 @@ export default function () {
         text="Go to Bottom Tabs"
         onPress={() => router.push(bottomTabs)}
       />
-      <Button text="Fetch Banner Movies" onPress={fetchBannerMovies} />
-      <FlashList
-        data={popular}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
-        estimatedItemSize={30}
-      />
+
+      <MotiPressable
+        onPress={toggleHeight}
+        animate={{ height }}
+        transition={{ type: 'timing' }}
+      >
+        <Image
+          source={{ uri: originalImage('/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg') }}
+          style={{
+            width: '100%',
+            height: '100%',
+            resizeMode: 'contain',
+          }}
+        />
+      </MotiPressable>
     </SafeAreaView>
   );
 }

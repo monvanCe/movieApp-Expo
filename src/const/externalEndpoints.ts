@@ -3,13 +3,6 @@ export const popularApi = `/movie/popular`;
 export const topRatedApi = `/movie/top_rated`;
 export const upComingApi = `/movie/upcoming`;
 
-export const lowResImage = (path: string) =>
-  `https://image.tmdb.org/t/p/w200${path}`;
-export const highResImage = (path: string) =>
-  `https://image.tmdb.org/t/p/w500${path}`;
-export const originalImage = (path: string) =>
-  `https://image.tmdb.org/t/p/original${path}`;
-
 export const searchMoviesApi = (term: string) => `/search/movie?query=${term}`;
 
 export const movieApi = (id: number) => `/movie/${id}`;
