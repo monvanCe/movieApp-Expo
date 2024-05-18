@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
-import Dropdown from '../../atoms/dropdown';
+import Dropdown from '../../components/atoms/dropdown';
 import { useState } from 'react';
-import { horizontalScale, verticalScale } from '../../../metrics/metricEngine';
-import { paddings } from '../../../metrics/sizes';
+import { horizontalScale, verticalScale } from '../../metrics/metricEngine';
+import { paddings } from '../../metrics/sizes';
 
 export default function () {
   const [selectedValue, setSelectedValue] = useState<string>();

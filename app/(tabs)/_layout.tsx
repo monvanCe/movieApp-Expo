@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 
-export default function TabLayout() {
+export default function () {
   return (
     <Tabs screenOptions={{ tabBarActiveTintColor: 'blue' }}>
       <Tabs.Screen

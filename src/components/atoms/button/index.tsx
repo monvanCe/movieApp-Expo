@@ -1,13 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { IButton } from '../../types';
 
-export default ({ text, onPress }: IButton) => {
+export default function ({ text, onPress }: IButton) {
   return (
     <TouchableOpacity onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
-};
+}
 
 const styles = StyleSheet.create({
   text: {
