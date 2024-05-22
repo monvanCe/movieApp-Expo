@@ -4,8 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import useToggle from '../../../hooks/useToggle';
-import { horizontalScale, moderateScale, verticalScale } from '../../../metrics/metricEngine';
-import { borderRadius, fontSizes, paddings } from '../../../metrics/sizes';
+import { horizontalScale, moderateScale, verticalScale } from '../../../styles/metricEngine';
+import { borderRadius, fontSizes, paddings } from '../../../styles/sizes';
 import { IDropdown } from '../../types';
 
 export default function ({ items, value, onChange }: IDropdown) {
