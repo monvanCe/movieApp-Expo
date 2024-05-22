@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { IMovie } from './types';
 
 interface moviesState {
@@ -53,9 +54,7 @@ export const moviesSlice = createSlice({
       state.owner.watchlist.push(action.payload);
     },
     removeOwnerWatchlist: (state, action: PayloadAction<number>) => {
-      state.owner.watchlist = state.owner.watchlist.filter(
-        (movie) => movie.id !== action.payload
-      );
+      state.owner.watchlist = state.owner.watchlist.filter(movie => movie.id !== action.payload);
     },
     setOwnerWatched: (state, action: PayloadAction<IMovie[]>) => {
       state.owner.watched = action.payload;
@@ -64,66 +63,42 @@ export const moviesSlice = createSlice({
       state.owner.watched.push(action.payload);
     },
     removeOwnerWatched: (state, action: PayloadAction<number>) => {
-      state.owner.watched = state.owner.watched.filter(
-        (movie) => movie.id !== action.payload
-      );
+      state.owner.watched = state.owner.watched.filter(movie => movie.id !== action.payload);
     },
-    setFriendWatchlist: (
-      state,
-      action: PayloadAction<{ id: number; movies: IMovie[] }>
-    ) => {
-      const friend = state.friends.find((f) => f.id === action.payload.id);
+    setFriendWatchlist: (state, action: PayloadAction<{ id: number; movies: IMovie[] }>) => {
+      const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watchlist = action.payload.movies;
       }
     },
-    addFriendWatchlist: (
-      state,
-      action: PayloadAction<{ id: number; movie: IMovie }>
-    ) => {
-      const friend = state.friends.find((f) => f.id === action.payload.id);
+    addFriendWatchlist: (state, action: PayloadAction<{ id: number; movie: IMovie }>) => {
+      const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watchlist.push(action.payload.movie);
       }
     },
-    removeFriendWatchlist: (
-      state,
-      action: PayloadAction<{ id: number; movieId: number }>
-    ) => {
-      const friend = state.friends.find((f) => f.id === action.payload.id);
+    removeFriendWatchlist: (state, action: PayloadAction<{ id: number; movieId: number }>) => {
+      const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
-        friend.watchlist = friend.watchlist.filter(
-          (movie) => movie.id !== action.payload.movieId
-        );
+        friend.watchlist = friend.watchlist.filter(movie => movie.id !== action.payload.movieId);
       }
     },
-    setFriendWatched: (
-      state,
-      action: PayloadAction<{ id: number; movies: IMovie[] }>
-    ) => {
-      const friend = state.friends.find((f) => f.id === action.payload.id);
+    setFriendWatched: (state, action: PayloadAction<{ id: number; movies: IMovie[] }>) => {
+      const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watched = action.payload.movies;
       }
     },
-    addFriendWatched: (
-      state,
-      action: PayloadAction<{ id: number; movie: IMovie }>
-    ) => {
-      const friend = state.friends.find((f) => f.id === action.payload.id);
+    addFriendWatched: (state, action: PayloadAction<{ id: number; movie: IMovie }>) => {
+      const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watched.push(action.payload.movie);
       }
     },
-    removeFriendWatched: (
-      state,
-      action: PayloadAction<{ id: number; movieId: number }>
-    ) => {
-      const friend = state.friends.find((f) => f.id === action.payload.id);
+    removeFriendWatched: (state, action: PayloadAction<{ id: number; movieId: number }>) => {
+      const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
-        friend.watched = friend.watched.filter(
-          (movie) => movie.id !== action.payload.movieId
-        );
+        friend.watched = friend.watched.filter(movie => movie.id !== action.payload.movieId);
       }
     },
   },

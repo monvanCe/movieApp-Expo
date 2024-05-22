@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { authSlice } from './userSlice';
-import { moviesSlice } from './moviesSlice';
+
+import { configureStore } from '@reduxjs/toolkit';
+
 import { appConfigSlice } from './appConfigSlice';
+import { moviesSlice } from './moviesSlice';
+import { authSlice } from './userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +15,4 @@ export const store = configureStore({
 });
 
 export const useAppDispatch: () => typeof store.dispatch = useDispatch;
-export const useAppSelector: TypedUseSelectorHook<
-  ReturnType<typeof store.getState>
-> = useSelector;
+export const useAppSelector: TypedUseSelectorHook<ReturnType<typeof store.getState>> = useSelector;

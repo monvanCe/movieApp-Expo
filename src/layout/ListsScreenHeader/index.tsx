@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
-import Dropdown from '../../components/atoms/dropdown';
 import { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+import Dropdown from '../../components/atoms/dropdown';
 import { horizontalScale, verticalScale } from '../../metrics/metricEngine';
 import { paddings } from '../../metrics/sizes';
 
@@ -13,7 +14,7 @@ export default function () {
       <Dropdown
         items={['item 1', 'item 2', 'item 3']}
         value={selectedValue}
-        onChange={(e) => setSelectedValue(e)}
+        onChange={e => setSelectedValue(e)}
       />
     </View>
   );

@@ -9,8 +9,7 @@ export const movieApi = (id: number) => `/movie/${id}`;
 
 export const genresApi = `/genre/movie/list`;
 
-export const genreMoviesApi = (genreId: number) =>
-  `/discover/movie?with_genres=${genreId}`;
+export const genreMoviesApi = (genreId: number) => `/discover/movie?with_genres=${genreId}`;
 
 export const similarMoviesApi = (id: number) => `/movie/${id}/similar`;
 

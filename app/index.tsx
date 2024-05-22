@@ -1,42 +1,40 @@
-import { router } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dimensions, Image, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import Button from '../src/components/atoms/button';
-import { bottomTabs } from '../src/const/routeNames';
-import { originalImage } from '../src/const/imageURLs';
-import { MotiView } from 'moti';
+import { router } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
 import { MotiPressable } from 'moti/interactions';
 
-export default function () {
-  const [height, setHeight] = React.useState<number>(100);
+import Button from '../src/components/atoms/button';
+import { lowResImage } from '../src/const/imageURLs';
+import { bottomTabs } from '../src/const/routeNames';
+import useToggle from '../src/hooks/useToggle';
 
-  const toggleHeight = () => {
-    setHeight(height === 100 ? 200 : 100);
-  };
+const { width } = Dimensions.get('window');
+
+export default function () {
+  const { isToggle, toggle } = useToggle();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button
-        text="Go to Bottom Tabs"
-        onPress={() => router.push(bottomTabs)}
-      />
+      <Button text='Go to Bottom Tabs' onPress={() => router.push(bottomTabs)} />
 
       <MotiPressable
-        onPress={toggleHeight}
-        animate={{ height }}
-        transition={{ type: 'timing' }}
-      >
+        onPress={toggle}
+        style={{ backgroundColor: 'black', aspectRatio: 16 / 9 }}
+        animate={{ width: isToggle ? width : width / 2 }}
+        transition={{ type: 'timing' }}>
         <Image
-          source={{ uri: originalImage('/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg') }}
+          source={{ uri: lowResImage('/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg') }}
           style={{
-            width: '100%',
             height: '100%',
+            width: '100%',
             resizeMode: 'contain',
           }}
         />
       </MotiPressable>
+      <StatusBar />
     </SafeAreaView>
   );
 }
@@ -44,6 +42,6 @@ export default function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8312a5',
+    alignItems: 'center',
   },
 });

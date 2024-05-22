@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+
 import { IButton } from '../../types';
 
 export default function ({ text, onPress }: IButton) {

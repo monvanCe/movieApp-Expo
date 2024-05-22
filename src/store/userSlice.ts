@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+
 import { IUser } from './types';
 
 interface AuthState {
@@ -16,7 +17,7 @@ export const authSlice = createSlice({
     setCurrentUser: (state, action: PayloadAction<IUser>) => {
       state.currentUser = action.payload;
     },
-    clearCurrentUser: (state) => {
+    clearCurrentUser: state => {
       state.currentUser = null;
     },
   },

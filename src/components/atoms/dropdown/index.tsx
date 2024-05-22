@@ -1,28 +1,24 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { IDropdown } from '../../types';
-import {
-  horizontalScale,
-  moderateScale,
-  verticalScale,
-} from '../../../metrics/metricEngine';
 import { useRef, useState } from 'react';
-import { borderRadius, fontSizes, paddings } from '../../../metrics/sizes';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 import { Ionicons } from '@expo/vector-icons';
-import useVisibility from '../../../hooks/useVisibility';
+
+import useToggle from '../../../hooks/useToggle';
+import { horizontalScale, moderateScale, verticalScale } from '../../../metrics/metricEngine';
+import { borderRadius, fontSizes, paddings } from '../../../metrics/sizes';
+import { IDropdown } from '../../types';
 
 export default function ({ items, value, onChange }: IDropdown) {
-  const { isVisible, close, toggle } = useVisibility();
+  const { isToggle, close, toggle } = useToggle();
   const [height, setHeight] = useState(0);
   const dropdownRef = useRef(null);
 
   const getDropdownHeight = () => {
     if (dropdownRef.current) {
       const dropdown: any = dropdownRef.current;
-      dropdown.measure(
-        (x: any, y: any, width: any, height: any, pageX: any, pageY: any) => {
-          setHeight(height);
-        }
-      );
+      dropdown.measure((x: any, y: any, width: any, height: any, pageX: any, pageY: any) => {
+        setHeight(height);
+      });
     }
   };
 
@@ -35,25 +31,23 @@ export default function ({ items, value, onChange }: IDropdown) {
           toggle();
           getDropdownHeight();
         }}
-        style={styles.dropdownButton}
-      >
+        style={styles.dropdownButton}>
         <Text style={styles.dropdownButtonText}>{value || 'Select item'}</Text>
         <Ionicons
-          name={isVisible ? 'caret-up' : 'caret-down'}
+          name={isToggle ? 'caret-up' : 'caret-down'}
           size={moderateScale(fontSizes.small)}
         />
       </TouchableOpacity>
-      {isVisible && (
+      {isToggle && (
         <View style={[styles.dropdownMenu, { top: height + 2 }]}>
-          {items.map((item) => (
+          {items.map(item => (
             <>
               <TouchableOpacity
                 style={styles.itemButton}
                 onPress={() => {
                   onChange(item);
                   close();
-                }}
-              >
+                }}>
                 <Text style={styles.itemText}>{item}</Text>
               </TouchableOpacity>
               {item !== items[items.length - 1] && (

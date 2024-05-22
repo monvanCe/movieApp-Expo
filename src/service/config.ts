@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { store } from '../store/store';
 
 const state = store.getState();
@@ -6,11 +7,7 @@ const internalURL = state.appConfig.internalURL;
 const externalURL = state.appConfig.externalURL;
 const apiKey = state.appConfig.apiKey;
 
-export const getRequest = (
-  type: 'internal' | 'external',
-  endpoint: string,
-  params = null
-) => {
+export const getRequest = (type: 'internal' | 'external', endpoint: string, params = null) => {
   const url = type === 'internal' ? internalURL : externalURL;
   return new Promise((resolve, reject) => {
     axios
@@ -23,8 +20,8 @@ export const getRequest = (
           'Content-Type': 'application/json',
         },
       })
-      .then((res) => resolve(res.data))
-      .catch((err) => reject(err));
+      .then(res => resolve(res.data))
+      .catch(err => reject(err));
   });
 };
 
@@ -46,16 +43,12 @@ export const postRequest = (
           'Content-Type': 'application/json',
         },
       })
-      .then((res) => resolve(res.data))
-      .catch((err) => reject(err));
+      .then(res => resolve(res.data))
+      .catch(err => reject(err));
   });
 };
 
-export const deleteRequest = (
-  type: 'internal' | 'external',
-  endpoint: string,
-  params = null
-) => {
+export const deleteRequest = (type: 'internal' | 'external', endpoint: string, params = null) => {
   const url = type === 'internal' ? internalURL : externalURL;
   return new Promise((resolve, reject) => {
     axios
@@ -68,8 +61,8 @@ export const deleteRequest = (
           'Content-Type': 'application/json',
         },
       })
-      .then((res) => resolve(res.data))
-      .catch((err) => reject(err));
+      .then(res => resolve(res.data))
+      .catch(err => reject(err));
   });
 };
 
@@ -91,7 +84,7 @@ export const putRequest = (
           'Content-Type': 'application/json',
         },
       })
-      .then((res) => resolve(res.data))
-      .catch((err) => reject(err));
+      .then(res => resolve(res.data))
+      .catch(err => reject(err));
   });
 };
