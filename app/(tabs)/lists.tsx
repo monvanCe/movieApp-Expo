@@ -2,7 +2,7 @@ import { Text, View } from 'react-native';
 
 import Header from '@layout/ListsScreenHeader';
 
-export default function () {
+export default function List() {
   return (
     <>
       <Header />

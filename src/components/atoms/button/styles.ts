@@ -1,12 +1,17 @@
 import { StyleSheet } from 'react-native';
 
+import metricEngine from '@styles/metricEngine';
+import sizes from '@styles/sizes';
 import { ITheme } from '@styles/types';
 
-export const styles = (colors: ITheme) =>
-  StyleSheet.create({
+export const styles = (colors: ITheme) => {
+  const { fontSizes } = sizes;
+
+  return StyleSheet.create({
     text: {
       color: colors.primaryText,
       textAlign: 'center',
-      fontSize: 18,
+      fontSize: metricEngine.moderateScale(fontSizes.medium),
     },
   });
+};

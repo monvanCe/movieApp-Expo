@@ -30,7 +30,7 @@ export const styles = (colors: ITheme) => {
       position: 'absolute',
       left: 0,
       right: 0,
-      borderWidth: 1,
+      borderWidth: borderWidths.small,
       borderColor: colors.border,
       borderRadius: borderRadius.small,
       backgroundColor: colors.surface,

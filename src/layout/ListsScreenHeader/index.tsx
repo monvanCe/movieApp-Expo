@@ -1,14 +1,10 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
-import sizes from '@styles/sizes';
 import theme from '@styles/theme';
-import { ITheme } from '@styles/types';
 
 import Dropdown from '../../components/atoms/dropdown';
-import metricEngine from '../../styles/metricEngine';
-
-const { paddings } = sizes;
+import { styles } from './styles';
 
 export default function () {
   const [selectedValue, setSelectedValue] = useState<string>();
@@ -26,20 +22,3 @@ export default function () {
     </View>
   );
 }
-
-const styles = (colors: ITheme) =>
-  StyleSheet.create({
-    container: {
-      paddingVertical: metricEngine.verticalScale(paddings.small),
-      paddingHorizontal: metricEngine.horizontalScale(paddings.small),
-      backgroundColor: colors.background,
-      zIndex: 1,
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      gap: metricEngine.horizontalScale(paddings.small),
-    },
-    text: {
-      color: colors.primaryText,
-    },
-  });

@@ -21,7 +21,7 @@ function AppLayout() {
   );
 }
 
-export default function () {
+export default function Wrapper() {
   return (
     <Provider store={store}>
       <AppLayout />

@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
 import useToggle from '@hooks/useToggle';
+import i18n from '@localization/index';
 import metricEngine from '@styles/metricEngine';
 import sizes from '@styles/sizes';
 import theme from '@styles/theme';
@@ -10,7 +11,7 @@ import theme from '@styles/theme';
 import { styles } from './styles';
 import { IDropdown } from './types';
 
-export default function ({ items, value, onChange }: IDropdown) {
+export default function Dropdown({ items, value, onChange }: IDropdown) {
   const { isToggle, close, toggle } = useToggle();
   const [height, setHeight] = useState(0);
   const dropdownRef = useRef(null);
@@ -37,7 +38,7 @@ export default function ({ items, value, onChange }: IDropdown) {
           getDropdownHeight();
         }}
         style={style.dropdownButton}>
-        <Text style={style.dropdownButtonText}>{value || 'Select item'}</Text>
+        <Text style={style.dropdownButtonText}>{value || i18n.t('none')}</Text>
         <Ionicons
           name={isToggle ? 'caret-up' : 'caret-down'}
           size={metricEngine.moderateScale(fontSizes.small)}
@@ -47,7 +48,7 @@ export default function ({ items, value, onChange }: IDropdown) {
       {isToggle && (
         <View style={[style.dropdownMenu, { top: height + 2 }]}>
           {items.map(item => (
-            <>
+            <View key={item.toString()}>
               <TouchableOpacity
                 style={style.itemButton}
                 onPress={() => {
@@ -64,7 +65,7 @@ export default function ({ items, value, onChange }: IDropdown) {
                   }}
                 />
               )}
-            </>
+            </View>
           ))}
         </View>
       )}

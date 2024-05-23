@@ -5,7 +5,7 @@ import theme from '@styles/theme';
 import { styles } from './styles';
 import { IButton } from './types';
 
-export default function ({ text, onPress }: IButton) {
+export default function Button({ text, onPress }: IButton) {
   const colors = theme.useTheme();
   const style = styles(colors);
 

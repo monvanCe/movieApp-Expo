@@ -10,22 +10,15 @@ import actions from '@store/actions';
 import { useAppSelector } from '@store/store';
 import theme from '@styles/theme';
 import { router } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 import { MotiPressable } from 'moti/interactions';
 
 const { width } = Dimensions.get('window');
 
-export default function () {
+export default function Main() {
   const { isToggle, toggle } = useToggle();
   const colors = theme.useTheme();
   const appConfigActions = actions.appConfigActions;
   const appTheme = useAppSelector(state => state.appConfig.appTheme);
-
-  React.useEffect(() => {
-    setTimeout(() => {
-      router.push(routeNames.bottomTabs);
-    }, 100);
-  }, []);
 
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.primary }]}>
