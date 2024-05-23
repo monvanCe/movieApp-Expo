@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import storage from '@utils/storage';
 
-import storage from '../../utils/storage';
 import { appTheme } from '../types';
 
 interface AppConfigState {

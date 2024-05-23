@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 
-import Header from '../../src/layout/ListsScreenHeader';
+import Header from '@layout/ListsScreenHeader';
 
 export default function () {
   return (

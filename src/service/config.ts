@@ -1,11 +1,10 @@
+import { store } from '@store/store';
 import axios from 'axios';
-
-import { store } from '../store/store';
 
 const state = store.getState();
 const internalURL = state.appConfig.internalURL;
 const externalURL = state.appConfig.externalURL;
-const apiKey = state.appConfig.apiKey;
+const apiKey = state.appConfig.externalApiKey;
 
 export const getRequest = (type: 'internal' | 'external', endpoint: string, params = null) => {
   const url = type === 'internal' ? internalURL : externalURL;

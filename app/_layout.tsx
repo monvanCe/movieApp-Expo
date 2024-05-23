@@ -3,10 +3,9 @@ import 'react-native-gesture-handler';
 import 'react-native-reanimated';
 import { Provider } from 'react-redux';
 
+import { store, useAppSelector } from '@store/store';
+import Theme, { themes } from '@styles/theme';
 import { Stack } from 'expo-router/stack';
-
-import { store, useAppSelector } from '../src/store/store';
-import Theme, { themes } from '../src/styles/theme';
 
 function AppLayout() {
   const currentTheme = useAppSelector(state => state.appConfig.appTheme);

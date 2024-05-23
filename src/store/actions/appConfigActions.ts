@@ -1,4 +1,5 @@
-import storage from '../../utils/storage';
+import storage from '@utils/storage';
+
 import slices from '../slices';
 import { store } from '../store';
 import { appTheme } from '../types';

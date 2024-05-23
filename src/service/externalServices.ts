@@ -1,5 +1,6 @@
-import * as endPoints from '../const/externalEndpoints';
-import { movieaMapper } from '../utils/dataMappers';
+import * as endPoints from '@const/externalEndpoints';
+import { movieaMapper } from '@utils/dataMappers';
+
 import { getRequest } from './config';
 
 export const fetchPopularMovies = async () => {

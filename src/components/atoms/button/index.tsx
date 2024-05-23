@@ -1,6 +1,7 @@
 import { Text, TouchableOpacity } from 'react-native';
 
-import theme from '../../../styles/theme';
+import theme from '@styles/theme';
+
 import { styles } from './styles';
 import { IButton } from './types';
 
