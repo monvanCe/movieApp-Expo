@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { IMovie } from './types';
+import { IMovie } from '../types';
 
 interface moviesState {
   nowPlaying: IMovie[];

@@ -1,11 +1,8 @@
 import * as externalServices from '../../service/externalServices';
-import {
-  setNowPlayingMovies,
-  setPopularMovies,
-  setTopRatedMovies,
-  setUpComingMovies,
-} from '../moviesSlice';
+import slices from '../slices';
 import { store } from '../store';
+
+const moviesSlice = slices.moviesSlice.actions;
 
 export const loadBannerMovies = async () => {
   const dispatch = store.dispatch;
@@ -15,8 +12,8 @@ export const loadBannerMovies = async () => {
   const topRated = await externalServices.fetchTopRatedMovies();
   const upComing = await externalServices.fetchUpComingMovies();
 
-  dispatch(setNowPlayingMovies(nowPlaying));
-  dispatch(setPopularMovies(popular));
-  dispatch(setTopRatedMovies(topRated));
-  dispatch(setUpComingMovies(upComing));
+  dispatch(moviesSlice.setNowPlayingMovies(nowPlaying));
+  dispatch(moviesSlice.setPopularMovies(popular));
+  dispatch(moviesSlice.setTopRatedMovies(topRated));
+  dispatch(moviesSlice.setUpComingMovies(upComing));
 };

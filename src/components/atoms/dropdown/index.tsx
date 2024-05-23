@@ -4,9 +4,9 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import useToggle from '../../../hooks/useToggle';
-import { horizontalScale, moderateScale, verticalScale } from '../../../styles/metricEngine';
+import metricEngine from '../../../styles/metricEngine';
 import { borderRadius, fontSizes, paddings } from '../../../styles/sizes';
-import { IDropdown } from '../../types';
+import { IDropdown } from './types';
 
 export default function ({ items, value, onChange }: IDropdown) {
   const { isToggle, close, toggle } = useToggle();
@@ -35,7 +35,7 @@ export default function ({ items, value, onChange }: IDropdown) {
         <Text style={styles.dropdownButtonText}>{value || 'Select item'}</Text>
         <Ionicons
           name={isToggle ? 'caret-up' : 'caret-down'}
-          size={moderateScale(fontSizes.small)}
+          size={metricEngine.moderateScale(fontSizes.small)}
         />
       </TouchableOpacity>
       {isToggle && (
@@ -71,17 +71,17 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   dropdownButton: {
-    paddingHorizontal: horizontalScale(paddings.small),
-    paddingVertical: verticalScale(paddings.small),
+    paddingHorizontal: metricEngine.horizontalScale(paddings.small),
+    paddingVertical: metricEngine.verticalScale(paddings.small),
     borderWidth: 1,
     borderColor: 'gray',
     borderRadius: borderRadius.small,
     flexDirection: 'row',
     alignItems: 'center',
-    gap: horizontalScale(paddings.small),
+    gap: metricEngine.horizontalScale(paddings.small),
   },
   dropdownButtonText: {
-    fontSize: moderateScale(fontSizes.small),
+    fontSize: metricEngine.moderateScale(fontSizes.small),
   },
   dropdownMenu: {
     position: 'absolute',
@@ -91,12 +91,12 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderRadius: borderRadius.small,
     backgroundColor: 'white',
-    paddingHorizontal: horizontalScale(paddings.small),
+    paddingHorizontal: metricEngine.horizontalScale(paddings.small),
   },
   itemButton: {
-    paddingVertical: verticalScale(paddings.small),
+    paddingVertical: metricEngine.verticalScale(paddings.small),
   },
   itemText: {
-    fontSize: moderateScale(fontSizes.small),
+    fontSize: metricEngine.moderateScale(fontSizes.small),
   },
 });

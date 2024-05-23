@@ -13,4 +13,8 @@ const moderateScale = (size: number, factor = defaultFactor) =>
 const horizontalScale = (size: number) => (width / guidelineBaseWidth) * size;
 const verticalScale = (size: number) => (height / guidelineBaseHeight) * size;
 
-export { horizontalScale, verticalScale, moderateScale };
+export default {
+  moderateScale,
+  horizontalScale,
+  verticalScale,
+};

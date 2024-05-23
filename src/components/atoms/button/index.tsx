@@ -1,19 +1,16 @@
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
-import { IButton } from '../../types';
+import theme from '../../../styles/theme';
+import { styles } from './styles';
+import { IButton } from './types';
 
 export default function ({ text, onPress }: IButton) {
+  const colors = theme.useTheme();
+  const style = styles(colors);
+
   return (
     <TouchableOpacity onPress={onPress}>
-      <Text style={styles.text}>{text}</Text>
+      <Text style={style.text}>{text}</Text>
     </TouchableOpacity>
   );
 }
-
-const styles = StyleSheet.create({
-  text: {
-    color: '#007aff',
-    textAlign: 'center',
-    fontSize: 18,
-  },
-});

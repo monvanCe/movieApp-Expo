@@ -7,35 +7,42 @@ import { StatusBar } from 'expo-status-bar';
 import { MotiPressable } from 'moti/interactions';
 
 import Atoms from '../src/components/atoms';
-import imageURLs from '../src/const/imageURLs';
+import imageSources from '../src/const/imageSources';
 import routeNames from '../src/const/routeNames';
 import useToggle from '../src/hooks/useToggle';
+import actions from '../src/store/actions';
+import theme from '../src/styles/theme';
 
 const { width } = Dimensions.get('window');
 
 export default function () {
   const { isToggle, toggle } = useToggle();
+  const colors = theme.useTheme();
+  const appConfigActions = actions.appConfigActions;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Atoms.Button text='Go to Bottom Tabs' onPress={() => router.push(routeNames.bottomTabs)} />
+    <>
+      <StatusBar style='light' />
+      <SafeAreaView style={[styles.container, { backgroundColor: colors.primary }]}>
+        <Atoms.button text='Go to Bottom Tabs' onPress={() => router.push(routeNames.bottomTabs)} />
+        <Atoms.button text='change app theme' onPress={() => appConfigActions.toggleTheme()} />
 
-      <MotiPressable
-        onPress={toggle}
-        style={{ backgroundColor: 'black', aspectRatio: 16 / 9 }}
-        animate={{ width: isToggle ? width : width / 2 }}
-        transition={{ type: 'timing' }}>
-        <Image
-          source={{ uri: imageURLs.highResImage('/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg') }}
-          style={{
-            height: '100%',
-            width: '100%',
-            resizeMode: 'contain',
-          }}
-        />
-      </MotiPressable>
-      <StatusBar />
-    </SafeAreaView>
+        <MotiPressable
+          onPress={toggle}
+          style={{ aspectRatio: 16 / 9 }}
+          animate={{ width: isToggle ? width : width / 2 }}
+          transition={{ type: 'timing' }}>
+          <Image
+            source={{ uri: imageSources.highResImage('/6MKr3KgOLmzOP6MSuZERO41Lpkt.jpg') }}
+            style={{
+              height: '100%',
+              width: '100%',
+              resizeMode: 'contain',
+            }}
+          />
+        </MotiPressable>
+      </SafeAreaView>
+    </>
   );
 }
 

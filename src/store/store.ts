@@ -2,9 +2,9 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { appConfigSlice } from './appConfigSlice';
-import { moviesSlice } from './moviesSlice';
-import { authSlice } from './userSlice';
+import { appConfigSlice } from './slices/appConfigSlice';
+import { moviesSlice } from './slices/moviesSlice';
+import { authSlice } from './slices/userSlice';
 
 export const store = configureStore({
   reducer: {

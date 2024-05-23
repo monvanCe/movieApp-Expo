@@ -27,3 +27,8 @@ export interface IMovie {
   voteAverage: number;
   voteCount: number;
 }
+
+export enum appTheme {
+  Light = 'light',
+  Dark = 'dark',
+}
