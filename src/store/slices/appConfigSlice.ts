@@ -44,7 +44,7 @@ export const appConfigSlice = createSlice({
   },
 });
 
-export const { setExternalURL, setInternalURL, setAppTheme, setExternalApiKey } =
+export const { setExternalURL, setInternalURL, setAppTheme, setExternalApiKey, setAppLanguage } =
   appConfigSlice.actions;
 
 export default appConfigSlice.reducer;

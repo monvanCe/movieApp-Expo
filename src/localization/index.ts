@@ -9,6 +9,8 @@ const i18n = new I18n({
   tr,
 });
 
-i18n.locale = store.getState().appConfig.appLanguage;
+const appLanguage = store.getState().appConfig.appLanguage;
+
+i18n.locale = appLanguage;
 
 export default i18n;
