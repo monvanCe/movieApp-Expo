@@ -32,3 +32,8 @@ export enum appTheme {
   Light = 'light',
   Dark = 'dark',
 }
+
+export enum storageKeys {
+  appTheme = 'appTheme',
+  appLanguage = 'appLanguage',
+}

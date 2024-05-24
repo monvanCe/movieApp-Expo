@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import storage from '@utils/storage';
 import { getLocales } from 'expo-localization';
 
-import { appTheme } from '../types';
+import { appTheme, storageKeys } from '../types';
 
 interface AppConfigState {
   externalURL: string;
@@ -35,11 +35,11 @@ export const appConfigSlice = createSlice({
     },
     setAppTheme: (state, action: PayloadAction<appTheme>) => {
       state.appTheme = action.payload;
-      storage.setItem('appTheme', action.payload);
+      storage.setItem(storageKeys.appTheme, action.payload);
     },
     setAppLanguage: (state, action: PayloadAction<string>) => {
       state.appLanguage = action.payload;
-      storage.setItem('appLanguage', action.payload);
+      storage.setItem(storageKeys.appLanguage, action.payload);
     },
   },
 });

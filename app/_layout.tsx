@@ -1,7 +1,7 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 import 'react-native-reanimated';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 
 import i18n from '@localization/index';
@@ -9,7 +9,6 @@ import { store, useAppSelector } from '@store/store';
 import { appTheme } from '@store/types';
 import Theme, { themes } from '@styles/theme';
 import { Stack } from 'expo-router/stack';
-import { StatusBar } from 'expo-status-bar';
 import { View } from 'moti';
 
 function AppLayout() {
@@ -21,9 +20,14 @@ function AppLayout() {
     i18n.locale = appLanguage;
   }, [appLanguage]);
 
+  React.useEffect(() => {
+    requestAnimationFrame(() => {
+      StatusBar.setBarStyle(currentTheme === appTheme.Light ? 'dark-content' : 'light-content');
+    });
+  }, [currentTheme]);
+
   return (
     <Theme.ThemeProvider theme={colors}>
-      <StatusBar style={currentTheme === appTheme.Dark ? appTheme.Light : appTheme.Dark} />
       <Stack>
         <Stack.Screen name='index' options={{ headerShown: false }} />
         <Stack.Screen
@@ -35,13 +39,6 @@ function AppLayout() {
             headerTitleStyle: { color: colors.primaryText },
             headerBackground: () => <View style={{ backgroundColor: colors.background }} />,
             headerTitleAlign: 'center',
-          }}
-        />
-        <Stack.Screen
-          name='modal'
-          options={{
-            headerShown: true,
-            presentation: 'modal',
           }}
         />
       </Stack>

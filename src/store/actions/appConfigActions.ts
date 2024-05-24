@@ -4,21 +4,19 @@ import { getLocales } from 'expo-localization';
 
 import slices from '../slices';
 import { store } from '../store';
-import { appTheme } from '../types';
+import { appTheme, storageKeys } from '../types';
 
 const appConfigSlice = slices.appConfigSlice.actions;
 
 export const loadTheme = async () => {
-  const dispatch = store.dispatch;
-  const appTheme = (await storage.getItem('appTheme')) as appTheme;
+  const appTheme = (await storage.getItem(storageKeys.appTheme)) as appTheme;
   if (appTheme) {
-    dispatch(appConfigSlice.setAppTheme(appTheme));
+    setAppTheme(appTheme);
   }
 };
 
 export const loadLanguage = async () => {
-  const dispatch = store.dispatch;
-  const appLanguage = (await storage.getItem('appLanguage')) as string;
+  const appLanguage = (await storage.getItem(storageKeys.appLanguage)) as string;
   let language = '';
 
   if (appLanguage) {
@@ -27,17 +25,22 @@ export const loadLanguage = async () => {
     language = getLocales()?.[0]?.languageCode || 'en';
   }
 
-  dispatch(appConfigSlice.setAppLanguage(language));
+  setAppLanguage(language);
 };
 
 export const toggleTheme = () => {
-  const dispatch = store.dispatch;
   const currentTheme = store.getState().appConfig.appTheme;
   const newTheme = currentTheme === appTheme.Dark ? appTheme.Light : appTheme.Dark;
-  dispatch(appConfigSlice.setAppTheme(newTheme));
+  setAppTheme(newTheme);
+};
+
+export const setAppTheme = (theme: appTheme) => {
+  const dispatch = store.dispatch;
+  dispatch(appConfigSlice.setAppTheme(theme));
 };
 
 export const setAppLanguage = (language: string) => {
   const dispatch = store.dispatch;
+  i18n.locale = language;
   dispatch(appConfigSlice.setAppLanguage(language));
 };

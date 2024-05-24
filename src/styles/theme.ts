@@ -22,7 +22,7 @@ export const themes = {
     primary: '#BB86FC',
     secondary: '#03DAC6',
     background: '#121212',
-    surface: '#121212',
+    surface: '#333333',
     primaryText: '#FFFFFF',
     secondaryText: '#E0E0E0',
     tertiaryText: '#BDBDBD',

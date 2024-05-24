@@ -12,7 +12,7 @@ export default function IconButton({ icon, onPress }: IIconButton) {
 
   return (
     <TouchableOpacity onPress={onPress}>
-      <Ionicons name={icon as any} size={24} color={style.text as any} />
+      <Ionicons name={icon as any} size={24} color={colors.primaryText} />
     </TouchableOpacity>
   );
 }
