@@ -1,5 +1,6 @@
 import i18n from '@localization/index';
 import storage from '@utils/storage';
+import { getLocales } from 'expo-localization';
 
 import slices from '../slices';
 import { store } from '../store';
@@ -18,9 +19,15 @@ export const loadTheme = async () => {
 export const loadLanguage = async () => {
   const dispatch = store.dispatch;
   const appLanguage = (await storage.getItem('appLanguage')) as string;
+  let language = '';
+
   if (appLanguage) {
-    dispatch(appConfigSlice.setAppLanguage(appLanguage));
+    language = appLanguage;
+  } else {
+    language = getLocales()?.[0]?.languageCode || 'en';
   }
+
+  dispatch(appConfigSlice.setAppLanguage(language));
 };
 
 export const toggleTheme = () => {

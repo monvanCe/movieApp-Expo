@@ -17,7 +17,7 @@ const initialState: AppConfigState = {
   externalApiKey: '4f098a761153500ca2a6a2d39980f694',
   internalURL: '',
   appTheme: appTheme.Dark,
-  appLanguage: getLocales()?.[0]?.languageCode || 'en',
+  appLanguage: 'en',
 };
 
 export const appConfigSlice = createSlice({

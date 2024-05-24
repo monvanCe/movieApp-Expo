@@ -20,14 +20,5 @@ export default function Main() {
     loadApp();
   }, []);
 
-  return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.primary }]}></SafeAreaView>
-  );
+  return <SafeAreaView style={{ backgroundColor: colors.background, flex: 1 }} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});

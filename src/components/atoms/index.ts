@@ -1,4 +1,5 @@
-import button from './button';
-import dropdown from './dropdown';
+import Button from './button';
+import Dropdown from './dropdown';
+import IconButton from './iconbutton';
 
-export default { button, dropdown };
+export default { Button, Dropdown, IconButton };

@@ -17,9 +17,9 @@ const fontSizes = {
 };
 
 const borderRadius = {
-  small: 4,
-  medium: 8,
-  large: 12,
+  small: 8,
+  medium: 16,
+  large: 32,
 };
 
 const borderWidths = {
