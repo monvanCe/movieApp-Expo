@@ -2,5 +2,9 @@
   "lists": "Lists",
   "search": "Search",
   "profile": "Profile",
-  "none": "No Selection"
+  "none": "No Selection",
+  "upComing": "Upcoming",
+  "popular": "Popular",
+  "topRated": "Top Rated",
+  "nowPlaying": "Now Playing"
 }

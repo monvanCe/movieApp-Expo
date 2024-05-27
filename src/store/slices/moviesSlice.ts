@@ -3,10 +3,10 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IMovie } from '../types';
 
 interface moviesState {
-  nowPlaying: IMovie[];
-  popular: IMovie[];
-  topRated: IMovie[];
-  upComing: IMovie[];
+  nowPlaying: IMovie[] | null;
+  popular: IMovie[] | null;
+  topRated: IMovie[] | null;
+  upComing: IMovie[] | null;
   owner: {
     watchlist: IMovie[];
     watched: IMovie[];
@@ -20,10 +20,10 @@ interface moviesState {
 }
 
 const initialState: moviesState = {
-  nowPlaying: [],
-  popular: [],
-  topRated: [],
-  upComing: [],
+  nowPlaying: null,
+  popular: null,
+  topRated: null,
+  upComing: null,
   owner: {
     watchlist: [],
     watched: [],

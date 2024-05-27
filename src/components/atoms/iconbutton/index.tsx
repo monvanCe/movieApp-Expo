@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -10,7 +10,7 @@ import { IIconButton } from './types';
 
 export default function IconButton({ icon, onPress }: IIconButton) {
   const colors = theme.useTheme();
-  const style = useMemo(() => styles(colors), [colors]);
+  const style = React.useMemo(() => styles(colors), [colors]);
   const { fontSizes } = sizes;
 
   return (

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -13,13 +13,13 @@ import { IDropdown } from './types';
 
 export default function Dropdown({ items, value, onChange }: IDropdown) {
   const { isToggle, close, toggle } = useToggle();
-  const [height, setHeight] = useState(0);
-  const dropdownRef = useRef(null);
+  const [height, setHeight] = React.useState(0);
+  const dropdownRef = React.useRef(null);
   const colors = theme.useTheme();
-  const style = useMemo(() => styles(colors), [colors]);
+  const style = React.useMemo(() => styles(colors), [colors]);
   const { fontSizes } = sizes;
 
-  const getDropdownHeight = useCallback(() => {
+  const getDropdownHeight = React.useCallback(() => {
     if (dropdownRef.current) {
       const dropdown: any = dropdownRef.current;
       dropdown.measure((x: any, y: any, width: any, height: any, pageX: any, pageY: any) => {

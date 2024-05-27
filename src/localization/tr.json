@@ -2,5 +2,9 @@
   "lists": "Liste",
   "search": "Ara",
   "profile": "Profil",
-  "none": "Seçim Yapılmadı"
+  "none": "Seçim Yapılmadı",
+  "upComing": "Gelecek Filmler",
+  "popular": "Popüler Filmler",
+  "topRated": "En Çok Beğenilenler",
+  "nowPlaying": "Şu An Vizyonda"
 }
