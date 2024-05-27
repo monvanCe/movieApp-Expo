@@ -15,6 +15,7 @@ module.exports = function (api) {
             '@hooks': 'hooks',
             '@layout': 'layout',
             '@localization': 'localization',
+            '@middleware': 'middleware',
             '@service': 'service',
             '@store': 'store',
             '@styles': 'styles',

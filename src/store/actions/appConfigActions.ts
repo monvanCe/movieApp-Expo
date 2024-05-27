@@ -1,10 +1,9 @@
 import i18n from '@localization/index';
+import slices from '@store/slices';
+import { store } from '@store/store';
+import { appTheme, storageKeys } from '@utils/enums';
 import storage from '@utils/storage';
 import { getLocales } from 'expo-localization';
-
-import slices from '../slices';
-import { store } from '../store';
-import { appTheme, storageKeys } from '../types';
 
 const appConfigSlice = slices.appConfigSlice.actions;
 

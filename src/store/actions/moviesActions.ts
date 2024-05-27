@@ -1,4 +1,5 @@
-import * as externalServices from '../../service/externalServices';
+import * as externalServices from '@service/externalServices';
+
 import slices from '../slices';
 import { store } from '../store';
 

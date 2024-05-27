@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 
 import i18n from '@localization/index';
 import { store, useAppSelector } from '@store/store';
-import { appTheme } from '@store/types';
 import Theme, { themes } from '@styles/theme';
+import { appTheme } from '@utils/enums';
 import { Stack } from 'expo-router/stack';
 import { View } from 'moti';
 

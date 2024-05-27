@@ -1,13 +1,14 @@
 import React from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { Ionicons } from '@expo/vector-icons';
 import i18n from '@localization/index';
+import sizes from '@styles/sizes';
 import theme from '@styles/theme';
 import { Tabs } from 'expo-router';
 
 export default function AppLayout() {
   const colors = theme.useTheme();
+  const { fontSizes } = sizes;
 
   return (
     <Tabs
@@ -19,6 +20,7 @@ export default function AppLayout() {
           borderTopWidth: 1,
           borderTopColor: colors.border,
         },
+        tabBarShowLabel: false,
       }}
       sceneContainerStyle={{ backgroundColor: colors.background }}>
       <Tabs.Screen
@@ -26,7 +28,7 @@ export default function AppLayout() {
         options={{
           title: i18n.t('lists'),
           headerShown: false,
-          tabBarIcon: ({ color }) => <Ionicons name='home' size={18} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name='home' size={fontSizes.large} color={color} />,
         }}
       />
       <Tabs.Screen
@@ -34,7 +36,9 @@ export default function AppLayout() {
         options={{
           title: i18n.t('search'),
           headerShown: false,
-          tabBarIcon: ({ color }) => <Ionicons name='search' size={18} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name='search' size={fontSizes.large} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -42,7 +46,9 @@ export default function AppLayout() {
         options={{
           title: i18n.t('profile'),
           headerShown: false,
-          tabBarIcon: ({ color }) => <Ionicons name='person' size={18} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <Ionicons name='person' size={fontSizes.large} color={color} />
+          ),
         }}
       />
     </Tabs>

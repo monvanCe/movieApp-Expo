@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
@@ -16,17 +16,17 @@ export default function Dropdown({ items, value, onChange }: IDropdown) {
   const [height, setHeight] = useState(0);
   const dropdownRef = useRef(null);
   const colors = theme.useTheme();
-  const style = styles(colors);
+  const style = useMemo(() => styles(colors), [colors]);
   const { fontSizes } = sizes;
 
-  const getDropdownHeight = () => {
+  const getDropdownHeight = useCallback(() => {
     if (dropdownRef.current) {
       const dropdown: any = dropdownRef.current;
       dropdown.measure((x: any, y: any, width: any, height: any, pageX: any, pageY: any) => {
         setHeight(height);
       });
     }
-  };
+  }, [dropdownRef, setHeight]);
 
   return (
     <View style={style.container}>

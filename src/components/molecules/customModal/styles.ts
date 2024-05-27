@@ -5,7 +5,7 @@ import sizes from '@styles/sizes';
 import { ITheme } from '@styles/types';
 
 export const styles = (colors: ITheme) => {
-  const { horizontalScale, verticalScale, moderateScale } = metricEngine;
+  const { horizontalScale } = metricEngine;
   const { borderRadius, paddings } = sizes;
 
   return StyleSheet.create({

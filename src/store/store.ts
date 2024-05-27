@@ -2,15 +2,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import { appConfigSlice } from './slices/appConfigSlice';
-import { moviesSlice } from './slices/moviesSlice';
-import { authSlice } from './slices/userSlice';
+import slices from './slices';
 
 export const store = configureStore({
   reducer: {
-    auth: authSlice.reducer,
-    movies: moviesSlice.reducer,
-    appConfig: appConfigSlice.reducer,
+    auth: slices.authSlice.reducer,
+    movies: slices.moviesSlice.reducer,
+    appConfig: slices.appConfigSlice.reducer,
   },
 });
 

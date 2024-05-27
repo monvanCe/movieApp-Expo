@@ -1,7 +1,6 @@
 import * as endPoints from '@const/externalEndpoints';
-import { movieaMapper } from '@utils/dataMappers';
 
-import { getRequest } from './config';
+import { getRequest } from './api';
 
 export const fetchPopularMovies = async () => {
   const popular: any = await getRequest('external', endPoints.popularApi);
@@ -25,7 +24,7 @@ export const fetchNowPlayingMovies = async () => {
 
 export const fetchMovieDetail = async (movieId: number) => {
   const movieDetail: any = await getRequest('external', endPoints.movieApi(movieId));
-  return movieaMapper(movieDetail);
+  return movieDetail;
 };
 
 export const searchMovies = async (term: string) => {

@@ -1,4 +1,4 @@
-export const movieaMapper = (movie: any) => ({
+export const movieDataTransformer = (movie: any) => ({
   isAdult: movie.adult,
   backdropPath: movie.backdrop_path,
   genreIds: movie.genres,

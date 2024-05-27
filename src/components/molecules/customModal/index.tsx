@@ -1,4 +1,5 @@
-import { Modal, Text, TouchableOpacity, View } from 'react-native';
+import { useMemo } from 'react';
+import { Modal, TouchableOpacity, View } from 'react-native';
 
 import Atoms from '@components/atoms';
 import theme from '@styles/theme';
@@ -8,7 +9,7 @@ import { ICustomModal } from './types';
 
 export default function CustomModal({ children, visible, onClose, height }: ICustomModal) {
   const colors = theme.useTheme();
-  const style = styles(colors);
+  const style = useMemo(() => styles(colors), [colors]);
 
   return (
     <Modal animationType='slide' transparent={true} visible={visible}>
