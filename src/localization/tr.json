@@ -6,5 +6,6 @@
   "upComing": "Gelecek Filmler",
   "popular": "Popüler Filmler",
   "topRated": "En Çok Beğenilenler",
-  "nowPlaying": "Şu An Vizyonda"
+  "nowPlaying": "Şu An Vizyonda",
+  "unmatchedRoute": "Yolunu kaybetmişe benziyorsun! Eve gitmek için tıkla"
 }

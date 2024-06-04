@@ -8,11 +8,13 @@ import Header from '@layout/ListsScreenHeader';
 import { fetchMovieDetail } from '@service/externalServices';
 import actions from '@store/actions';
 import { useAppSelector } from '@store/store';
+import { useRouter } from 'expo-router';
 
 export default function List() {
   const [movie, setMovie] = React.useState();
   const appConfigActions = actions.appConfigActions;
   const appLanguage = useAppSelector(state => state.appConfig.appLanguage);
+  const route = useRouter();
 
   const { open, close, isToggle } = useToggle();
 
@@ -33,6 +35,7 @@ export default function List() {
         />
         <Atoms.Button text='open modal' onPress={open} />
         <Atoms.Button text='fetch movie' onPress={fetchMovie} />
+        <Atoms.Button text='route' onPress={() => route.replace('ss')} />
         <Molecules.CustomModal height={'50%'} visible={isToggle} onClose={close}>
           <View
             style={{

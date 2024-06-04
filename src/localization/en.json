@@ -6,5 +6,6 @@
   "upComing": "Upcoming",
   "popular": "Popular",
   "topRated": "Top Rated",
-  "nowPlaying": "Now Playing"
+  "nowPlaying": "Now Playing",
+  "unmatchedRoute": "You seem to have lost your way! Click to go home"
 }

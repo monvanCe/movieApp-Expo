@@ -1,6 +1,7 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
 
+import { FlashList } from '@shopify/flash-list';
 import metricEngine from '@styles/metricEngine';
 import sizes from '@styles/sizes';
 import theme from '@styles/theme';
@@ -16,19 +17,22 @@ export default function HorizontalList({ movies }: IHorizontalList) {
   const style = React.useMemo(() => styles(colors), [colors]);
 
   return (
-    <FlatList
-      showsHorizontalScrollIndicator={false}
-      data={movies}
-      keyExtractor={item => item.id.toString()}
-      horizontal
-      renderItem={({ item }) => <PosterItem movie={item} />}
-      ListEmptyComponent={() => (
-        <View style={{ flexDirection: 'row' }}>
-          {Array.from({ length: 5 }).map((_, index) => (
-            <SkeletonItem key={index} />
-          ))}
-        </View>
-      )}
-    />
+    <View style={{ flex: 1 }}>
+      <FlashList
+        showsHorizontalScrollIndicator={false}
+        data={movies}
+        keyExtractor={item => item.id.toString()}
+        horizontal
+        renderItem={({ item }) => <PosterItem movie={item} />}
+        ListEmptyComponent={() => (
+          <View style={{ flexDirection: 'row' }}>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <SkeletonItem key={index} />
+            ))}
+          </View>
+        )}
+        estimatedItemSize={20}
+      />
+    </View>
   );
 }

@@ -4,21 +4,18 @@ import 'react-native-gesture-handler';
 import 'react-native-reanimated';
 import { Provider } from 'react-redux';
 
-import i18n from '@localization/index';
+import { loadLanguage, loadTheme } from '@store/actions/appConfigActions';
 import { store, useAppSelector } from '@store/store';
 import Theme, { themes } from '@styles/theme';
 import { appTheme } from '@utils/enums';
-import { Stack } from 'expo-router/stack';
-import { View } from 'moti';
+import { SplashScreen } from 'expo-router';
+import { Stack } from 'expo-router';
+
+SplashScreen.preventAutoHideAsync();
 
 function AppLayout() {
   const currentTheme = useAppSelector(state => state.appConfig.appTheme);
   const colors = themes[currentTheme];
-  const appLanguage = useAppSelector(state => state.appConfig.appLanguage);
-
-  React.useEffect(() => {
-    i18n.locale = appLanguage;
-  }, [appLanguage]);
 
   React.useEffect(() => {
     requestAnimationFrame(() => {
@@ -26,27 +23,33 @@ function AppLayout() {
     });
   }, [currentTheme]);
 
+  React.useEffect(() => {
+    const loadApp = async () => {
+      await loadTheme();
+      await loadLanguage();
+    };
+
+    loadApp().then(() => {
+      SplashScreen.hideAsync();
+    });
+  }, []);
+
   return (
     <Theme.ThemeProvider theme={colors}>
       <Stack>
-        <Stack.Screen name='index' options={{ headerShown: false }} />
         <Stack.Screen
           name='(tabs)'
           options={{
-            headerShown: true,
-            title: 'Movie App',
-            headerStyle: { backgroundColor: colors.background },
-            headerTitleStyle: { color: colors.primaryText },
-            headerBackground: () => <View style={{ backgroundColor: colors.background }} />,
-            headerTitleAlign: 'center',
+            headerShown: false,
           }}
         />
+        <Stack.Screen name='+not-found' />
       </Stack>
     </Theme.ThemeProvider>
   );
 }
 
-export default function Wrapper() {
+export default function () {
   return (
     <Provider store={store}>
       <AppLayout />

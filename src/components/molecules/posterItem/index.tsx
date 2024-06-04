@@ -12,12 +12,8 @@ export default function PosterItem({ movie }: IPosterItem) {
   const style = React.useMemo(() => styles(colors), [colors]);
 
   return (
-    <TouchableOpacity style={style.container}>
-      <Image
-        source={{ uri: imageSources.lowResImage(movie.posterPath) }}
-        style={style.image}
-        resizeMode='cover'
-      />
+    <TouchableOpacity activeOpacity={1} style={style.container}>
+      <Image source={{ uri: imageSources.lowResImage(movie.posterPath) }} style={style.image} />
     </TouchableOpacity>
   );
 }

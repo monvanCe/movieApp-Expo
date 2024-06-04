@@ -1,4 +1,5 @@
 import { loggerInterceptor } from '@middleware/loggerInterceptor';
+import { paramInterceptor } from '@middleware/paramInterceptor';
 import { transformerInterceptor } from '@middleware/transformerInterceptor';
 import { store } from '@store/store';
 import axios from 'axios';
@@ -12,11 +13,11 @@ const axiosInstance = axios.create({
   },
   params: {
     api_key: apiKey,
-    language: 'tr-TR',
   },
 });
 
-loggerInterceptor(axiosInstance);
+paramInterceptor(axiosInstance);
 transformerInterceptor(axiosInstance);
+loggerInterceptor(axiosInstance);
 
 export default axiosInstance;
