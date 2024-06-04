@@ -65,6 +65,14 @@ export const moviesSlice = createSlice({
     removeOwnerWatched: (state, action: PayloadAction<number>) => {
       state.owner.watched = state.owner.watched.filter(movie => movie.id !== action.payload);
     },
+    addFriend: (state, action: PayloadAction<{ id: number; name: string }>) => {
+      state.friends.push({
+        id: action.payload.id,
+        name: action.payload.name,
+        watchlist: [],
+        watched: [],
+      });
+    },
     setFriendWatchlist: (state, action: PayloadAction<{ id: number; movies: IMovie[] }>) => {
       const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {

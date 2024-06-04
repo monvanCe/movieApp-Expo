@@ -38,7 +38,6 @@ export const appConfigSlice = createSlice({
     },
     setAppLanguage: (state, action: PayloadAction<string>) => {
       state.appLanguage = action.payload;
-      storage.setItem(storageKeys.appLanguage, action.payload);
     },
   },
 });

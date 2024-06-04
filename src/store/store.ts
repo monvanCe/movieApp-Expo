@@ -2,11 +2,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import { configureStore } from '@reduxjs/toolkit';
 
-import slices from './slices';
+import reducers from './slices/reducers';
 
 export const store = configureStore({
   reducer: {
-    ...slices,
+    ...reducers,
   },
 });
 

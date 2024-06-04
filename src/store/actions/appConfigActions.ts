@@ -4,6 +4,7 @@ import { store } from '@store/store';
 import { appTheme, storageKeys } from '@utils/enums';
 import storage from '@utils/storage';
 import { getLocales } from 'expo-localization';
+import * as Updates from 'expo-updates';
 
 export const loadTheme = async () => {
   const appTheme = (await storage.getItem(storageKeys.appTheme)) as appTheme;
@@ -13,6 +14,7 @@ export const loadTheme = async () => {
 };
 
 export const loadLanguage = async () => {
+  const dispatch = store.dispatch;
   const appLanguage = (await storage.getItem(storageKeys.appLanguage)) as string;
   let language = '';
 
@@ -22,7 +24,8 @@ export const loadLanguage = async () => {
     language = getLocales()?.[0]?.languageCode || 'en';
   }
 
-  setAppLanguage(language);
+  i18n.locale = language;
+  dispatch(setAppLanguage(language));
 };
 
 export const toggleTheme = () => {
@@ -36,8 +39,7 @@ export const setAppThemeAction = (theme: appTheme) => {
   dispatch(setAppTheme(theme));
 };
 
-export const setAppLanguageAction = (language: string) => {
-  const dispatch = store.dispatch;
-  i18n.locale = language;
-  dispatch(setAppLanguage(language));
+export const setAppLanguageAction = async (language: string) => {
+  await storage.setItem(storageKeys.appLanguage, language);
+  Updates.reloadAsync();
 };
