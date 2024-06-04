@@ -6,9 +6,7 @@ import slices from './slices';
 
 export const store = configureStore({
   reducer: {
-    auth: slices.authSlice.reducer,
-    movies: slices.moviesSlice.reducer,
-    appConfig: slices.appConfigSlice.reducer,
+    ...slices,
   },
 });
 

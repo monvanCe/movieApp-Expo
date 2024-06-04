@@ -1,9 +1,9 @@
-import { appConfigSlice } from './appConfigSlice';
-import { moviesSlice } from './moviesSlice';
-import { authSlice } from './userSlice';
+import appConfigSlice from './appConfigSlice';
+import authSlice from './authSlice';
+import moviesSlice from './moviesSlice';
 
 export default {
-  appConfigSlice,
-  authSlice,
-  moviesSlice,
+  appConfig: appConfigSlice,
+  movies: moviesSlice,
+  auth: authSlice,
 };

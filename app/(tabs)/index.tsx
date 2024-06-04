@@ -7,6 +7,7 @@ import useToggle from '@hooks/useToggle';
 import Header from '@layout/ListsScreenHeader';
 import { fetchMovieDetail } from '@service/externalServices';
 import actions from '@store/actions';
+import { setAppLanguageAction } from '@store/actions/appConfigActions';
 import { useAppSelector } from '@store/store';
 import { useRouter } from 'expo-router';
 
@@ -31,7 +32,7 @@ export default function List() {
         <Atoms.Button text='toggle theme' onPress={() => appConfigActions.toggleTheme()} />
         <Atoms.Button
           text='toggle language'
-          onPress={() => appConfigActions.setAppLanguage(appLanguage === 'en' ? 'tr' : 'en')}
+          onPress={() => setAppLanguageAction(appLanguage === 'en' ? 'tr' : 'en')}
         />
         <Atoms.Button text='open modal' onPress={open} />
         <Atoms.Button text='fetch movie' onPress={fetchMovie} />

@@ -1,16 +1,14 @@
 import i18n from '@localization/index';
-import slices from '@store/slices';
+import { setAppLanguage, setAppTheme } from '@store/slices/appConfigSlice';
 import { store } from '@store/store';
 import { appTheme, storageKeys } from '@utils/enums';
 import storage from '@utils/storage';
 import { getLocales } from 'expo-localization';
 
-const appConfigSlice = slices.appConfigSlice.actions;
-
 export const loadTheme = async () => {
   const appTheme = (await storage.getItem(storageKeys.appTheme)) as appTheme;
   if (appTheme) {
-    setAppTheme(appTheme);
+    setAppThemeAction(appTheme);
   }
 };
 
@@ -33,13 +31,13 @@ export const toggleTheme = () => {
   setAppTheme(newTheme);
 };
 
-export const setAppTheme = (theme: appTheme) => {
+export const setAppThemeAction = (theme: appTheme) => {
   const dispatch = store.dispatch;
-  dispatch(appConfigSlice.setAppTheme(theme));
+  dispatch(setAppTheme(theme));
 };
 
-export const setAppLanguage = (language: string) => {
+export const setAppLanguageAction = (language: string) => {
   const dispatch = store.dispatch;
   i18n.locale = language;
-  dispatch(appConfigSlice.setAppLanguage(language));
+  dispatch(setAppLanguage(language));
 };
