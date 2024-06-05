@@ -12,7 +12,6 @@ import { useAppSelector } from '@store/store';
 import { useRouter } from 'expo-router';
 
 export default function List() {
-  const [movie, setMovie] = React.useState();
   const appConfigActions = actions.appConfigActions;
   const appLanguage = useAppSelector(state => state.appConfig.appLanguage);
   const route = useRouter();
@@ -22,7 +21,6 @@ export default function List() {
   const fetchMovie = React.useCallback(async () => {
     const movie = await fetchMovieDetail(14);
     console.log(movie);
-    setMovie(movie);
   }, []);
 
   return (

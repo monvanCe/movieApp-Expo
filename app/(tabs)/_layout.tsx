@@ -24,13 +24,13 @@ export default function AppLayout() {
             borderTopColor: colors.border,
           },
           tabBarShowLabel: true,
+          headerShown: false,
         }}
         sceneContainerStyle={{ backgroundColor: colors.background }}>
         <Tabs.Screen
           name='index'
           options={{
             title: i18n.t('lists'),
-            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Ionicons name='home' size={fontSizes.large} color={color} />
             ),
@@ -40,7 +40,6 @@ export default function AppLayout() {
           name='search'
           options={{
             title: i18n.t('search'),
-            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Ionicons name='search' size={fontSizes.large} color={color} />
             ),
@@ -50,7 +49,6 @@ export default function AppLayout() {
           name='profile'
           options={{
             title: i18n.t('profile'),
-            headerShown: false,
             tabBarIcon: ({ color }) => (
               <Ionicons name='person' size={fontSizes.large} color={color} />
             ),

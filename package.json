@@ -9,6 +9,8 @@
     "web": "expo start --web",
     "expo-update": "npm install expo@latest",
     "depencies-update": "npx expo install --fix",
+    "android-apk": "eas build -p android --profile preview",
+    "ios-ipa": "eas build -p ios --profile preview",
     "eas-update": "eas update",
     "eas-build": "eas build --platform all",
     "eas-submit": "eas submit --platform all"

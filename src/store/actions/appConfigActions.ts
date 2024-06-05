@@ -31,7 +31,7 @@ export const loadLanguage = async () => {
 export const toggleTheme = () => {
   const currentTheme = store.getState().appConfig.appTheme;
   const newTheme = currentTheme === appTheme.Dark ? appTheme.Light : appTheme.Dark;
-  setAppTheme(newTheme);
+  setAppThemeAction(newTheme);
 };
 
 export const setAppThemeAction = (theme: appTheme) => {
