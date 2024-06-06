@@ -1,6 +1,7 @@
 import React from 'react';
+import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import Atoms from '@components/atoms';
 import { Ionicons } from '@expo/vector-icons';
 import i18n from '@localization/index';
 import sizes from '@styles/sizes';
@@ -10,10 +11,10 @@ import { Tabs } from 'expo-router';
 export default function AppLayout() {
   const colors = theme.useTheme();
   const { fontSizes } = sizes;
+  const insets = useSafeAreaInsets();
 
   return (
-    <>
-      <Atoms.SafeAreaView />
+    <View style={{ flex: 1, paddingTop: insets.top, backgroundColor: colors.background }}>
       <Tabs
         screenOptions={{
           tabBarActiveTintColor: colors.primary,
@@ -55,6 +56,6 @@ export default function AppLayout() {
           }}
         />
       </Tabs>
-    </>
+    </View>
   );
 }

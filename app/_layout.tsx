@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import 'react-native-gesture-handler';
 import 'react-native-reanimated';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 
 import { loadLanguage, loadTheme } from '@store/actions/appConfigActions';
@@ -52,7 +53,9 @@ function AppLayout() {
 export default function () {
   return (
     <Provider store={store}>
-      <AppLayout />
+      <SafeAreaProvider>
+        <AppLayout />
+      </SafeAreaProvider>
     </Provider>
   );
 }
