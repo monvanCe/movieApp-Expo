@@ -1,11 +1,8 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { View } from 'react-native';
 
 import { FlashList } from '@shopify/flash-list';
-import metricEngine from '@styles/metricEngine';
-import sizes from '@styles/sizes';
 import theme from '@styles/theme';
-import { Skeleton } from 'moti/skeleton';
 
 import PosterItem from '../posterItem';
 import SkeletonItem from '../skeletonItem';

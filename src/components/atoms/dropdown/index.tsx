@@ -7,6 +7,7 @@ import i18n from '@localization/index';
 import metricEngine from '@styles/metricEngine';
 import sizes from '@styles/sizes';
 import theme from '@styles/theme';
+import { MotiView } from 'moti';
 
 import { styles } from './styles';
 import { IDropdown } from './types';
@@ -38,15 +39,24 @@ export default function Dropdown({ items, value, onChange }: IDropdown) {
           getDropdownHeight();
         }}
         style={style.dropdownButton}>
-        <Text style={style.dropdownButtonText}>{value || i18n.t('none')}</Text>
-        <Ionicons
-          name={isToggle ? 'caret-up' : 'caret-down'}
-          size={metricEngine.moderateScale(fontSizes.small)}
-          color={colors.primaryText}
-        />
+        <View style={{ flex: 1 }}>
+          <Text numberOfLines={1} style={style.dropdownButtonText}>
+            {value || i18n.t('none')}
+          </Text>
+        </View>
+        <View style={{ width: 15 }}>
+          <Ionicons
+            name={isToggle ? 'caret-up' : 'caret-down'}
+            size={metricEngine.moderateScale(fontSizes.small)}
+            color={colors.primaryText}
+          />
+        </View>
       </TouchableOpacity>
       {isToggle && (
-        <View style={[style.dropdownMenu, { top: height + 2 }]}>
+        <MotiView
+          from={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          style={[style.dropdownMenu, { top: height + 2 }]}>
           {items.map(item => (
             <View key={item.toString()}>
               <TouchableOpacity
@@ -67,7 +77,7 @@ export default function Dropdown({ items, value, onChange }: IDropdown) {
               )}
             </View>
           ))}
-        </View>
+        </MotiView>
       )}
     </View>
   );

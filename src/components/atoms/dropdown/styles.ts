@@ -5,11 +5,12 @@ import sizes from '@styles/sizes';
 import { ITheme } from '@styles/types';
 
 export const styles = (colors: ITheme) => {
-  const { paddings, fontSizes, borderRadius, borderWidths } = sizes;
+  const { paddings, fontSizes, borderRadius, borderWidths, margins } = sizes;
 
   return StyleSheet.create({
     container: {
       position: 'relative',
+      width: '100%',
     },
     dropdownButton: {
       paddingHorizontal: metricEngine.horizontalScale(paddings.small),
@@ -19,6 +20,7 @@ export const styles = (colors: ITheme) => {
       borderRadius: borderRadius.small,
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'space-between',
       gap: metricEngine.horizontalScale(paddings.small),
       backgroundColor: colors.background,
     },

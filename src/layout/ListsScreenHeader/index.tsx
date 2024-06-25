@@ -14,11 +14,13 @@ export default function () {
   return (
     <View style={style.container}>
       <Text style={style.text}>Lists: </Text>
-      <Dropdown
-        items={['item 1', 'item 2', 'item 3']}
-        value={selectedValue}
-        onChange={e => setSelectedValue(e)}
-      />
+      <View style={{ width: 75 }}>
+        <Dropdown
+          items={['item 1', 'item 2', 'item 3']}
+          value={selectedValue}
+          onChange={e => setSelectedValue(e)}
+        />
+      </View>
     </View>
   );
 }
