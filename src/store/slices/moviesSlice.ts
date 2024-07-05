@@ -7,9 +7,14 @@ interface moviesState {
   popular: IMovie[] | null;
   topRated: IMovie[] | null;
   upComing: IMovie[] | null;
-  owner: {
+  user: {
     watchlist: IMovie[];
     watched: IMovie[];
+    list: {
+      id: number;
+      name: string;
+      movies: IMovie[];
+    }[];
   };
   friends: {
     id: number;
@@ -24,9 +29,10 @@ const initialState: moviesState = {
   popular: null,
   topRated: null,
   upComing: null,
-  owner: {
+  user: {
     watchlist: [],
     watched: [],
+    list: [],
   },
   friends: [],
 };
@@ -47,24 +53,56 @@ export const moviesSlice = createSlice({
     setUpComingMovies: (state, action: PayloadAction<IMovie[]>) => {
       state.upComing = action.payload;
     },
-    setOwnerWatchlist: (state, action: PayloadAction<IMovie[]>) => {
-      state.owner.watchlist = action.payload;
+    setUserWatchlist: (state, action: PayloadAction<IMovie[]>) => {
+      state.user.watchlist = action.payload;
     },
-    addOwnerWatchlist: (state, action: PayloadAction<IMovie>) => {
-      state.owner.watchlist.push(action.payload);
+    addUserWatchlist: (state, action: PayloadAction<IMovie>) => {
+      state.user.watchlist.push(action.payload);
     },
-    removeOwnerWatchlist: (state, action: PayloadAction<number>) => {
-      state.owner.watchlist = state.owner.watchlist.filter(movie => movie.id !== action.payload);
+    removeUserWatchlist: (state, action: PayloadAction<number>) => {
+      state.user.watchlist = state.user.watchlist.filter(movie => movie.id !== action.payload);
     },
-    setOwnerWatched: (state, action: PayloadAction<IMovie[]>) => {
-      state.owner.watched = action.payload;
+    setUserWatched: (state, action: PayloadAction<IMovie[]>) => {
+      state.user.watched = action.payload;
     },
-    addOwnerWatched: (state, action: PayloadAction<IMovie>) => {
-      state.owner.watched.push(action.payload);
+    addUserWatched: (state, action: PayloadAction<IMovie>) => {
+      state.user.watched.push(action.payload);
     },
-    removeOwnerWatched: (state, action: PayloadAction<number>) => {
-      state.owner.watched = state.owner.watched.filter(movie => movie.id !== action.payload);
+    removeUserWatched: (state, action: PayloadAction<number>) => {
+      state.user.watched = state.user.watched.filter(movie => movie.id !== action.payload);
     },
+    setUserList: (state, action: PayloadAction<{ name: string; movies: IMovie[] }>) => {
+      const id = Date.now();
+      state.user.list.push({
+        id,
+        name: action.payload.name,
+        movies: action.payload.movies,
+      });
+    },
+    addUserList: (state, action: PayloadAction<{ name: string; movies: IMovie[] }>) => {
+      const id = Date.now();
+      state.user.list.push({
+        id,
+        name: action.payload.name,
+        movies: action.payload.movies,
+      });
+    },
+    removeUserList: (state, action: PayloadAction<number>) => {
+      state.user.list = state.user.list.filter(list => list.id !== action.payload);
+    },
+    addMovieToList: (state, action: PayloadAction<{ listId: number; movie: IMovie }>) => {
+      const list = state.user.list.find(l => l.id === action.payload.listId);
+      if (list) {
+        list.movies.push(action.payload.movie);
+      }
+    },
+    removeMovieFromList: (state, action: PayloadAction<{ listId: number; movieId: number }>) => {
+      const list = state.user.list.find(l => l.id === action.payload.listId);
+      if (list) {
+        list.movies = list.movies.filter(movie => movie.id !== action.payload.movieId);
+      }
+    },
+
     addFriend: (state, action: PayloadAction<{ id: number; name: string }>) => {
       state.friends.push({
         id: action.payload.id,
@@ -117,17 +155,23 @@ export const {
   setPopularMovies,
   setTopRatedMovies,
   setUpComingMovies,
-  setOwnerWatchlist,
-  addOwnerWatchlist,
-  removeOwnerWatchlist,
-  setOwnerWatched,
-  addOwnerWatched,
-  removeOwnerWatched,
+  setUserWatchlist,
+  addUserWatchlist,
+  removeUserWatchlist,
+  setUserWatched,
+  addUserWatched,
+  removeUserWatched,
   setFriendWatchlist,
   addFriendWatchlist,
   removeFriendWatchlist,
   setFriendWatched,
   addFriendWatched,
   removeFriendWatched,
+  setUserList,
+  addUserList,
+  removeUserList,
+  addMovieToList,
+  removeMovieFromList,
+  addFriend,
 } = moviesSlice.actions;
 export default moviesSlice.reducer;

@@ -1,28 +1,28 @@
-const paddings = {
+export const paddings = {
   small: 6,
   medium: 12,
   large: 18,
 };
 
-const margins = {
+export const margins = {
   small: 12,
   medium: 16,
   large: 20,
 };
 
-const fontSizes = {
+export const fontSizes = {
   small: 12,
   medium: 18,
   large: 24,
 };
 
-const borderRadius = {
+export const borderRadius = {
   small: 8,
   medium: 16,
   large: 32,
 };
 
-const borderWidths = {
+export const borderWidths = {
   small: 1,
   medium: 2,
   large: 3,

@@ -1,7 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { appTheme, storageKeys } from '@utils/enums';
 import storage from '@utils/storage';
-import { getLocales } from 'expo-localization';
 
 interface AppConfigState {
   externalURL: string;
