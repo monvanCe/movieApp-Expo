@@ -1,3 +1,4 @@
+import { cacherInterceptor } from '@middleware/cacherInterceptor';
 import { loggerInterceptor } from '@middleware/loggerInterceptor';
 import { paramInterceptor } from '@middleware/paramInterceptor';
 import { transformerInterceptor } from '@middleware/transformerInterceptor';
@@ -16,6 +17,7 @@ const axiosInstance = axios.create({
   },
 });
 
+cacherInterceptor(axiosInstance);
 paramInterceptor(axiosInstance);
 transformerInterceptor(axiosInstance);
 loggerInterceptor(axiosInstance);

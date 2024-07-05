@@ -27,9 +27,13 @@ export default function List() {
           }}>
           <View style={{ width: '100%', aspectRatio: 2 }}>
             <ImageStack
-              images={
-                nowPlayingMovies?.map(movie => lowResImage(movie.posterPath)).slice(0, 5) || []
-              }
+              images={[
+                'https://image.tmdb.org/t/p/w200/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
+                'https://image.tmdb.org/t/p/w200/aCbFH1BfHjW14VxiA0ZmkNJTZKI.jpg',
+                'https://image.tmdb.org/t/p/w200/qWWsxnHBajcAjSlL6EsHdtIBmf9.jpg',
+                'https://image.tmdb.org/t/p/w200/qgB3vyMKLfpImQNdOtz4FrDD0a2.jpg',
+                'https://image.tmdb.org/t/p/w200/aPjJeaJPNeH1F5u7RQXJJWYg9pA.jpg',
+              ]}
             />
           </View>
           <Text numberOfLines={2} style={{ color: color.primaryText }}>

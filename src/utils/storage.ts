@@ -24,8 +24,17 @@ const removeItem = async (key: string) => {
   }
 };
 
+const clear = async () => {
+  try {
+    await AsyncStorage.clear();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export default {
   setItem,
   getItem,
   removeItem,
+  clear,
 };

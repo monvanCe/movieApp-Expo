@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 
 import theme from '@styles/theme';
+import { Image } from 'expo-image';
 
 import { styles } from './styles';
 import { IImageStack } from './types';
@@ -21,11 +22,7 @@ export default function ImageStack({ images }: IImageStack) {
         setMargin(-(width / 3));
       });
     }
-  }, [containerRef, images]);
-
-  const blurhash =
-    '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
-
+  }, [containerRef.current, images]);
   return (
     <View ref={containerRef} style={style.container}>
       {images.map((image, index) => (

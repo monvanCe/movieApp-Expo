@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 import imageSources from '@const/imageSources';
 import theme from '@styles/theme';
+import { Image } from 'expo-image';
 
 import { styles } from './styles';
 import { IPosterItem } from './types';
