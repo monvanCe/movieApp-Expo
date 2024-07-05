@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import PosterItem from '@components/atoms/posterItem';
+import SkeletonItem from '@components/atoms/skeletonItem';
 import { FlashList } from '@shopify/flash-list';
 import theme from '@styles/theme';
 
-import PosterItem from '../posterItem';
-import SkeletonItem from '../skeletonItem';
 import { styles } from './styles';
 import { IHorizontalList } from './types';
 
