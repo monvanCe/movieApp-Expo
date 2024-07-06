@@ -10,9 +10,10 @@ import theme from '@styles/theme';
 import { MotiView } from 'moti';
 
 import { styles } from './styles';
-import { IDropdown } from './types';
 
-export default function Dropdown({ items, value, onChange }: IDropdown) {
+interface props extends IText, ITexts, IOnPressWithParam {}
+
+export default function Dropdown({ texts, text, onPress }: props) {
   const { isToggle, close, toggle } = useToggle();
   const [height, setHeight] = React.useState(0);
   const dropdownRef = React.useRef(null);
@@ -41,7 +42,7 @@ export default function Dropdown({ items, value, onChange }: IDropdown) {
         style={style.dropdownButton}>
         <View style={{ flex: 1 }}>
           <Text numberOfLines={1} style={style.dropdownButtonText}>
-            {value || i18n.t('none')}
+            {text || i18n.t('none')}
           </Text>
         </View>
         <View style={{ width: 15 }}>
@@ -57,17 +58,17 @@ export default function Dropdown({ items, value, onChange }: IDropdown) {
           from={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           style={[style.dropdownMenu, { top: height + 2 }]}>
-          {items.map(item => (
+          {texts.map((item: string) => (
             <View key={item.toString()}>
               <TouchableOpacity
                 style={style.itemButton}
                 onPress={() => {
-                  onChange(item);
+                  onPress(item);
                   close();
                 }}>
                 <Text style={style.itemText}>{item}</Text>
               </TouchableOpacity>
-              {item !== items[items.length - 1] && (
+              {item !== texts[texts.length - 1] && (
                 <View
                   style={{
                     height: 1,

@@ -16,10 +16,10 @@ export default function BannerMovies() {
 
   return (
     <ScrollView style={{ flex: 1, marginBottom: 10 }}>
-      <Molecules.MoviesSlider movies={topRated ?? []} title={i18n.t('topRated')} />
-      <Molecules.MoviesSlider movies={popular ?? []} title={i18n.t('popular')} />
-      <Molecules.MoviesSlider movies={upComing ?? []} title={i18n.t('upComing')} />
-      <Molecules.MoviesSlider movies={nowPlaying ?? []} title={i18n.t('nowPlaying')} />
+      <Molecules.MoviesSlider movies={topRated ?? []} text={i18n.t('topRated')} />
+      <Molecules.MoviesSlider movies={popular ?? []} text={i18n.t('popular')} />
+      <Molecules.MoviesSlider movies={upComing ?? []} text={i18n.t('upComing')} />
+      <Molecules.MoviesSlider movies={nowPlaying ?? []} text={i18n.t('nowPlaying')} />
     </ScrollView>
   );
 }

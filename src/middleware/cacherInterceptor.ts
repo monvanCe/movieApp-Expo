@@ -35,7 +35,6 @@ export const cacherInterceptor = (axiosInstance: any) => {
       return response;
     },
     (error: unknown) => {
-      // Hatalı response durumunda cache'e kaydetme
       return Promise.reject(error);
     }
   );
