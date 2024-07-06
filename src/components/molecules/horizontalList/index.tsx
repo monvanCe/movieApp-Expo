@@ -7,9 +7,8 @@ import { FlashList } from '@shopify/flash-list';
 import theme from '@styles/theme';
 
 import { styles } from './styles';
-import { IHorizontalList } from './types';
 
-export default function HorizontalList({ movies }: IHorizontalList) {
+export default function HorizontalList({ movies }: IMovies) {
   const colors = theme.useTheme();
   const style = React.useMemo(() => styles(colors), [colors]);
 

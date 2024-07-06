@@ -5,9 +5,8 @@ import theme from '@styles/theme';
 import { Image } from 'expo-image';
 
 import { styles } from './styles';
-import { IImageStack } from './types';
 
-export default function ImageStack({ images }: IImageStack) {
+export default function ImageStack({ images }: IImages) {
   const [margin, setMargin] = useState(100);
   const [width, setWidth] = useState(0);
   const containerRef = useRef(null);

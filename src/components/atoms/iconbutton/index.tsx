@@ -6,9 +6,10 @@ import sizes from '@styles/sizes';
 import theme from '@styles/theme';
 
 import { styles } from './styles';
-import { IIconButton } from './types';
 
-export default function IconButton({ icon, onPress }: IIconButton) {
+interface props extends IIcon, IOnPress {}
+
+export default function IconButton({ icon, onPress }: props) {
   const colors = theme.useTheme();
   const style = React.useMemo(() => styles(colors), [colors]);
   const { fontSizes } = sizes;

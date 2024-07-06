@@ -6,9 +6,8 @@ import theme from '@styles/theme';
 import { Image } from 'expo-image';
 
 import { styles } from './styles';
-import { IPosterItem } from './types';
 
-export default function PosterItem({ movie }: IPosterItem) {
+export default function PosterItem({ movie }: { movie: IMovie }) {
   const colors = theme.useTheme();
   const style = React.useMemo(() => styles(colors), [colors]);
 

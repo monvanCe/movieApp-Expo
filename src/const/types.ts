@@ -50,10 +50,6 @@ interface IChildren {
   children: React.ReactNode;
 }
 
-interface IUserAddList {
-  onPress: () => void;
-}
-
 interface IOnPress {
   onPress: () => void;
 }
@@ -78,7 +74,7 @@ interface IMovies {
   movies: IMovie[];
 }
 
-interface IICon {
+interface IIcon {
   icon: string;
 }
 

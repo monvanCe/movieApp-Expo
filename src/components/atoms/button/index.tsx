@@ -4,9 +4,10 @@ import { Text, TouchableOpacity } from 'react-native';
 import theme from '@styles/theme';
 
 import { styles } from './styles';
-import { IButton } from './types';
 
-export default function Button({ text, onPress }: IButton) {
+interface props extends IText, IOnPress {}
+
+export default function Button({ text, onPress }: props) {
   const colors = theme.useTheme();
   const style = React.useMemo(() => styles(colors), [colors]);
 
