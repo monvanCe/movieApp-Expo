@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 import metricEngine from '@styles/metricEngine';
 import sizes from '@styles/sizes';
-import { ITheme } from '@styles/types';
 
 export const styles = (colors: ITheme) => {
   const { horizontalScale } = metricEngine;
@@ -19,7 +18,10 @@ export const styles = (colors: ITheme) => {
       padding: horizontalScale(paddings.large),
     },
     iconButtonContainer: {
-      alignItems: 'flex-end',
+      position: 'relative',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
     },
   });
 };
