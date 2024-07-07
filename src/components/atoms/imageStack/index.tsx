@@ -17,6 +17,7 @@ export default function ImageStack({ images }: IImages) {
     if (containerRef.current) {
       const container: any = containerRef.current;
       container.measure((x: any, y: any, width: any, height: any, pageX: any, pageY: any) => {
+        if (!width) return;
         setWidth(width);
         setMargin(-(width / 3));
       });

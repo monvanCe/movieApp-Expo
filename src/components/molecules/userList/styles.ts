@@ -10,8 +10,8 @@ export const styles = (colors: ITheme) => {
       borderColor: colors.border,
       borderRadius: borderRadius.medium,
       width: '100%',
-      aspectRatio: 0.75,
       justifyContent: 'space-between',
+      aspectRatio: 0.75,
     },
     text: { color: colors.primaryText },
   });

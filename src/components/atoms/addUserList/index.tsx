@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
+import { fontSizes } from '@styles/sizes';
 import theme from '@styles/theme';
 
 import { styles } from './styles';
@@ -13,7 +14,7 @@ export default function AddUserList({ onPress }: props) {
   const style = useMemo(() => styles(colors), [colors]);
   return (
     <TouchableOpacity onPress={onPress} style={style.container}>
-      <Ionicons name='add' size={24} color={colors.primary} />
+      <Ionicons name='add' size={fontSizes.large * 2} color={colors.primaryText} />
     </TouchableOpacity>
   );
 }
