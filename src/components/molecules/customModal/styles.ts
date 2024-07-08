@@ -24,5 +24,14 @@ export const styles = (colors: ITheme) => {
       justifyContent: 'flex-end',
       alignItems: 'center',
     },
+    modalSlider: {
+      height: 5,
+      backgroundColor: colors.divider,
+      width: '20%',
+      position: 'absolute',
+      left: '40%',
+      right: '40%',
+      borderRadius: borderRadius.large,
+    },
   });
 };
