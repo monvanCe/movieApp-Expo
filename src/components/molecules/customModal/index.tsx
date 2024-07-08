@@ -39,12 +39,20 @@ export default function CustomModal({
 
   const handleMove = (event: GestureResponderEvent, gestureState: PanResponderGestureState) => {
     setChangeY(prev => prev + gestureState.dy);
+    if (gestureState.dy > 10) {
+      setChangeY(0);
+      onPress();
+    }
+  };
+
+  const handleRelease = () => {
+    setChangeY(0);
   };
 
   const pandResponser = PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onPanResponderMove: handleMove,
-    onPanResponderRelease: () => setChangeY(0),
+    onPanResponderRelease: handleRelease,
   });
 
   return (
