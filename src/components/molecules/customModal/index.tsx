@@ -6,6 +6,7 @@ import {
   Modal,
   PanResponder,
   PanResponderGestureState,
+  Platform,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -28,6 +29,7 @@ export default function CustomModal({
   height,
 }: ICustomModalWithHeight) {
   const screenHeight = Dimensions.get('screen').height;
+  const windowHeight = Dimensions.get('window').height;
   const containerHeight: any = useMemo(
     () => (typeof height === 'string' ? screenHeight * (parseFloat(height) / 100) : height),
     [height]
@@ -66,7 +68,7 @@ export default function CustomModal({
           <View
             style={{
               height: containerHeight - changeY,
-              maxHeight: screenHeight - insets.top,
+              maxHeight: windowHeight - (Platform.OS === 'ios' ? insets.top : 0),
               paddingHorizontal: paddings.medium,
               paddingBottom: insets.bottom,
             }}>
