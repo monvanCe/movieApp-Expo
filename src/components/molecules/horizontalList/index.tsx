@@ -1,9 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
+import { FlatList, View } from 'react-native';
 
 import PosterItem from '@components/atoms/posterItem';
 import SkeletonItem from '@components/atoms/skeletonItem';
-import { FlashList } from '@shopify/flash-list';
 import theme from '@styles/theme';
 
 import { styles } from './styles';
@@ -14,7 +13,7 @@ export default function HorizontalList({ movies }: IMovies) {
 
   return (
     <View style={{ flex: 1 }}>
-      <FlashList
+      <FlatList
         showsHorizontalScrollIndicator={false}
         data={movies}
         keyExtractor={item => item.id.toString()}
@@ -27,7 +26,6 @@ export default function HorizontalList({ movies }: IMovies) {
             ))}
           </View>
         )}
-        estimatedItemSize={20}
       />
     </View>
   );

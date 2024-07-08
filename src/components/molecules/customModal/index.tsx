@@ -27,7 +27,7 @@ export default function CustomModal({
   onPress,
   height,
 }: ICustomModalWithHeight) {
-  const screenHeight = Dimensions.get('window').height;
+  const screenHeight = Dimensions.get('screen').height;
   const containerHeight: any = useMemo(
     () => (typeof height === 'string' ? screenHeight * (parseFloat(height) / 100) : height),
     [height]
@@ -56,26 +56,28 @@ export default function CustomModal({
   });
 
   return (
-    <Modal statusBarTranslucent animationType='slide' transparent visible={visible}>
-      <TouchableOpacity
-        style={{ flex: 1, backgroundColor: 'black', opacity: 0.1 }}
-        onPress={onPress}
-      />
-      <View style={style.modalContainer}>
-        <View
-          style={{
-            height: containerHeight - changeY,
-            maxHeight: screenHeight - insets.top,
-            paddingHorizontal: paddings.medium,
-            paddingBottom: insets.bottom,
-          }}>
-          <View {...pandResponser.panHandlers} style={style.iconButtonContainer}>
-            <View style={style.modalSlider} />
-            <Atoms.IconButton icon='close' onPress={onPress} />
+    <>
+      <Modal statusBarTranslucent animationType='slide' transparent visible={visible}>
+        <TouchableOpacity
+          style={{ flex: 1, backgroundColor: 'black', opacity: 0.1 }}
+          onPress={onPress}
+        />
+        <View {...pandResponser.panHandlers} style={style.modalContainer}>
+          <View
+            style={{
+              height: containerHeight - changeY,
+              maxHeight: screenHeight - insets.top,
+              paddingHorizontal: paddings.medium,
+              paddingBottom: insets.bottom,
+            }}>
+            <View style={style.iconButtonContainer}>
+              <View style={style.modalSlider} />
+              <Atoms.IconButton icon='close' onPress={onPress} />
+            </View>
+            {children}
           </View>
-          {children}
         </View>
-      </View>
-    </Modal>
+      </Modal>
+    </>
   );
 }
