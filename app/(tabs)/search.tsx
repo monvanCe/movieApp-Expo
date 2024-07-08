@@ -13,7 +13,7 @@ export default function Search() {
   useEffect(() => {
     Animated.timing(heightAnim, {
       toValue: isToggle ? 844 : 422,
-      duration: 1500,
+      duration: 10000,
       useNativeDriver: false,
     }).start();
   }, [isToggle]);

@@ -8,14 +8,15 @@ export const styles = (colors: ITheme) => {
   const { borderRadius, paddings } = sizes;
 
   return StyleSheet.create({
-    modalContent: {
+    modalContainer: {
       width: '100%',
       backgroundColor: colors.surface,
       borderTopRightRadius: horizontalScale(borderRadius.large),
       borderTopLeftRadius: horizontalScale(borderRadius.large),
       position: 'absolute',
       bottom: 0,
-      padding: horizontalScale(paddings.large),
+      justifyContent: 'flex-end',
+      paddingTop: paddings.medium,
     },
     iconButtonContainer: {
       position: 'relative',

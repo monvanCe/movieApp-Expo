@@ -20,21 +20,9 @@ export default function CustomModal({
   height,
 }: ICustomModalWithHeight) {
   const screenHeight = Dimensions.get('window').height;
-  const [paddingTop, setPaddingTop] = React.useState(0);
   const insets = useSafeAreaInsets();
   const colors = theme.useTheme();
   const style = React.useMemo(() => styles(colors), [colors]);
-
-  useEffect(() => {
-    const containerHeight: any =
-      typeof height === 'string' ? (parseFloat(height) / 100) * screenHeight : height;
-
-    if (containerHeight - horizontalScale(paddings.medium) > screenHeight - insets.top) {
-      setPaddingTop(insets.top - (screenHeight - containerHeight));
-    } else {
-      setPaddingTop(horizontalScale(paddings.medium));
-    }
-  }, [height]);
 
   return (
     <Modal animationType='slide' transparent={true} visible={visible}>
@@ -42,21 +30,29 @@ export default function CustomModal({
         style={{ flex: 1, backgroundColor: 'black', opacity: 0.1 }}
         onPress={onPress}
       />
-      <View style={[style.modalContent, { height, paddingTop }]}>
-        <View style={style.iconButtonContainer}>
-          <View
-            style={{
-              height: 5,
-              backgroundColor: colors.divider,
-              width: '20%',
-              position: 'absolute',
-              left: '40%',
-              right: '40%',
-              borderRadius: borderRadius.large,
-            }}></View>
-          <Atoms.IconButton icon='close' onPress={onPress} />
+      <View style={style.modalContainer}>
+        <View
+          style={{
+            height,
+            maxHeight: screenHeight - insets.top,
+            paddingHorizontal: paddings.medium,
+            paddingBottom: insets.bottom,
+          }}>
+          <View style={style.iconButtonContainer}>
+            <View
+              style={{
+                height: 5,
+                backgroundColor: colors.divider,
+                width: '20%',
+                position: 'absolute',
+                left: '40%',
+                right: '40%',
+                borderRadius: borderRadius.large,
+              }}></View>
+            <Atoms.IconButton icon='close' onPress={onPress} />
+          </View>
+          {children}
         </View>
-        {children}
       </View>
     </Modal>
   );
