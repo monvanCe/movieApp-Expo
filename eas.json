@@ -11,9 +11,6 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
-      },
-      "ios": {
-        "buildType": "ipa"
       }
     },
     "production": {}

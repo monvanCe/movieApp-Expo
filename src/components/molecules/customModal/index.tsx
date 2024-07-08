@@ -39,7 +39,7 @@ export default function CustomModal({
 
   const handleMove = (event: GestureResponderEvent, gestureState: PanResponderGestureState) => {
     setChangeY(prev => prev + gestureState.dy);
-    if (gestureState.dy > 10) {
+    if (gestureState.dy > 50) {
       setChangeY(0);
       onPress();
     }
@@ -56,7 +56,7 @@ export default function CustomModal({
   });
 
   return (
-    <Modal animationType='slide' transparent={true} visible={visible}>
+    <Modal statusBarTranslucent animationType='slide' transparent visible={visible}>
       <TouchableOpacity
         style={{ flex: 1, backgroundColor: 'black', opacity: 0.1 }}
         onPress={onPress}

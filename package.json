@@ -24,6 +24,7 @@
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "axios": "^1.6.8",
     "axios-logger": "^2.8.1",
+    "babel-plugin-ignite-ignore-reactotron": "^0.3.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "expo": "^51.0.18",
     "expo-constants": "~16.0.2",

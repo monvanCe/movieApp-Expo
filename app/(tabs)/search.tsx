@@ -10,7 +10,7 @@ export default function Search() {
 
   return (
     <View style={{ flex: 1 }}>
-      <TouchableOpacity onPress={toggle} style={{ height: 40, backgroundColor: 'red' }}>
+      <TouchableOpacity onPress={toggle} style={{ height: 40, backgroundColor: 'gray' }}>
         <Molecules.CustomModal visible={isToggle} onPress={close} height={'100%'}>
           <Text>Modal</Text>
         </Molecules.CustomModal>
