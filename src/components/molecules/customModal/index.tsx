@@ -42,7 +42,6 @@ export default function CustomModal({
   const handleMove = (event: GestureResponderEvent, gestureState: PanResponderGestureState) => {
     setChangeY(prev => prev + gestureState.dy);
     if (gestureState.dy > 50) {
-      setChangeY(0);
       onPress();
     }
   };

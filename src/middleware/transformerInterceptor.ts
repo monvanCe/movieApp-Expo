@@ -1,4 +1,3 @@
-import { IMovie } from '@store/types';
 import { movieDataTransformer } from '@utils/transformers';
 
 export interface AxiosRequestConfig {
@@ -19,15 +18,16 @@ export const transformerInterceptor = (axiosInstance: any) => {
   axiosInstance.interceptors.response.use((response: AxiosResponse) => {
     let newResponse = response;
 
-    if (response.data.results && response.data.results[0]['poster_path']) {
+    if (response?.data?.results && response?.data?.results[0]?.['poster_path']) {
       newResponse.data.results = response.data.results.map((movie: IMovie) =>
         movieDataTransformer(movie)
       );
     }
 
-    if (response.data['poster_path']) {
+    if (response?.data?.['poster_path']) {
       newResponse.data = movieDataTransformer(response.data);
     }
+
     return newResponse;
   });
 };
