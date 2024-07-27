@@ -13,7 +13,7 @@ interface AppConfigState {
 const initialState: AppConfigState = {
   externalURL: 'https://api.themoviedb.org/3',
   externalApiKey: '4f098a761153500ca2a6a2d39980f694',
-  internalURL: '',
+  internalURL: 'https://movielt.monvance.com',
   appTheme: appTheme.Dark,
   appLanguage: 'en',
 };

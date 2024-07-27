@@ -3,11 +3,13 @@ import Button from './button';
 import Dropdown from './dropdown';
 import IconButton from './iconbutton';
 import ImageStack from './imageStack';
+import Label from './label';
 import PosterItem from './posterItem';
 import SearchButton from './searchButton';
 import SkeletonItem from './skeletonItem';
 
 export default {
+  Label,
   Button,
   Dropdown,
   IconButton,

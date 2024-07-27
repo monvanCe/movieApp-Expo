@@ -1,11 +1,11 @@
 import storage from '@utils/storage';
 
-const whitelist = ['https://api.themoviedb.org'];
+const whitelistPatterns = [/^\/movie\/\d+$/, /^\/person\/\d+$/];
 
 export const cacherInterceptor = (axiosInstance: any) => {
   axiosInstance.interceptors.request.use(async (config: any) => {
     const url = new URL(config.url);
-    if (whitelist.includes(url.origin)) {
+    if (whitelistPatterns.some(pattern => pattern.test(url.pathname))) {
       const cacheKey = `${config.url}-${JSON.stringify(config.params)}`;
       const cachedResponse = await storage.getItem(cacheKey);
 
@@ -28,7 +28,10 @@ export const cacherInterceptor = (axiosInstance: any) => {
   axiosInstance.interceptors.response.use(
     async (response: any) => {
       const url = new URL(response.config.url);
-      if (whitelist.includes(url.origin) && response.status === 200) {
+      if (
+        whitelistPatterns.some(pattern => pattern.test(url.pathname)) &&
+        response.status === 200
+      ) {
         const cacheKey = `${response.config.url}-${JSON.stringify(response.config.params)}`;
         await storage.setItem(cacheKey, JSON.stringify(response.data));
       }

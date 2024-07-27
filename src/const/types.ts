@@ -17,16 +17,14 @@ interface ITheme {
 }
 
 interface IUser {
-  id?: string;
-  token?: string;
-  username?: string;
-  description?: string;
-  profilePictureURL?: string;
-  gender?: string;
-  isPremium?: boolean;
-  isAdmin?: boolean;
-  language?: string;
-  notificationToken?: string;
+  userId:  string,
+  isPremium : boolean,
+  isAdmin : boolean,
+  rollbackId :  string,
+  avatarId : number,
+  language :  string,
+  userName :  string ,
+  createdAt :  string ,
 }
 
 interface IMovie {
@@ -80,4 +78,8 @@ interface IIcon {
 
 interface IVisible {
   visible: boolean;
+}
+
+interface IToken {
+  token: string;
 }

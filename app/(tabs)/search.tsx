@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { Animated, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, TextInput, TouchableOpacity, View } from 'react-native';
 
 import Atoms from '@components/atoms';
 import Molecules from '@components/molecules';

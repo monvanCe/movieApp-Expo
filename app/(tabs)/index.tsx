@@ -1,22 +1,20 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+
 
 import Atoms from '@components/atoms';
 import Molecules from '@components/molecules';
 import { lowResImage } from '@const/imageSources';
+import { useAuth } from '@hooks/useAuth';
 import Header from '@layout/ListsScreenHeader';
 import { useAppSelector } from '@store/store';
-import { borderRadius, borderWidths, fontSizes, paddings } from '@styles/sizes';
-import theme from '@styles/theme';
+import { paddings } from '@styles/sizes';
+
 
 export default function List() {
+  const { login } = useAuth();
   const nowPlayingMovies = useAppSelector(state => state.movies.nowPlaying);
-  const colors = theme.useTheme();
-  const fakeUser: IUser = {
-    id: '1',
-    username: 'username',
-    description: 'description',
-  };
+
 
   return (
     <>
@@ -36,11 +34,10 @@ export default function List() {
             <Atoms.AddUserList onPress={() => {}} />
           </View>
         </View>
-        <Molecules.CoList
-          onPress={() => {}}
-          user={fakeUser}
-          images={nowPlayingMovies?.map(movie => lowResImage(movie.posterPath)).slice(0, 5) || []}
-        />
+        <Atoms.Label text='Friends Lists:' />
+        <TouchableOpacity onPress={login}>
+          <Text>Login</Text>
+        </TouchableOpacity>
       </View>
     </>
   );
