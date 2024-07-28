@@ -4,7 +4,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Ionicons } from '@expo/vector-icons';
 import i18n from '@localization/index';
-import sizes from '@styles/sizes';
+import sizes, { paddings } from '@styles/sizes';
 import theme from '@styles/theme';
 import { Tabs } from 'expo-router';
 
@@ -23,6 +23,9 @@ export default function AppLayout() {
             backgroundColor: colors.background,
             borderTopWidth: 1,
             borderTopColor: colors.border,
+          },
+          tabBarLabelStyle: {
+            fontSize: fontSizes.small,
           },
           tabBarShowLabel: true,
           headerShown: false,

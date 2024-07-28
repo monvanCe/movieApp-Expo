@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import ImageStack from '@components/atoms/imageStack';
+import SecondaryText from '@components/atoms/secondary-text';
 import theme from '@styles/theme';
 
 import { styles } from './styles';
@@ -16,9 +17,9 @@ export default function UserList({ images, text, onPress }: props) {
       <View style={{ width: '100%', aspectRatio: 2 }}>
         <ImageStack images={images} />
       </View>
-      <Text numberOfLines={2} style={style.text}>
+      <SecondaryText numberOfLines={2} style={style.text}>
         {text}
-      </Text>
+      </SecondaryText>
     </TouchableOpacity>
   );
 }

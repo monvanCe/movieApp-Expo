@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Image, TextInput, TouchableOpacity, View } from 'react-native';
 
-import Atoms from '@components/atoms';
-import Molecules from '@components/molecules';
-import Organism from '@components/organism';
+import SearchButton from '@components/atoms/searchButton';
+import CustomModal from '@components/molecules/customModal';
+import BannerMovies from '@components/organism/bannerMovies';
 import { lowResImage } from '@const/imageSources';
 import useToggle from '@hooks/useToggle';
 import { searchMovies } from '@service/externalServices';
@@ -30,9 +30,9 @@ export default function Search() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Atoms.SearchButton onPress={toggle} />
-      <Organism.BannerMovies />
-      <Molecules.CustomModal visible={isToggle} onPress={close} height={'100%'}>
+      <SearchButton onPress={toggle} />
+      <BannerMovies />
+      <CustomModal visible={isToggle} onPress={close} height={'100%'}>
         <TextInput
           style={{
             marginTop: 16,
@@ -71,7 +71,7 @@ export default function Search() {
           keyExtractor={item => item.id.toString()}
           estimatedItemSize={100}
         />
-      </Molecules.CustomModal>
+      </CustomModal>
     </View>
   );
 }

@@ -1,4 +1,4 @@
-import { storageKeys } from '@utils/enums';
+import { storageKeys } from '@const/enums';
 import storage from '@utils/storage';
 import { AxiosRequestConfig } from 'axios';
 

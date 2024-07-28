@@ -1,20 +1,18 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-
-import Atoms from '@components/atoms';
-import Molecules from '@components/molecules';
+import AddUserList from '@components/atoms/addUserList';
+import PrimaryText from '@components/atoms/primary-text';
+import UserList from '@components/molecules/userList';
 import { lowResImage } from '@const/imageSources';
 import { useAuth } from '@hooks/useAuth';
 import Header from '@layout/ListsScreenHeader';
 import { useAppSelector } from '@store/store';
 import { paddings } from '@styles/sizes';
 
-
 export default function List() {
   const { login } = useAuth();
   const nowPlayingMovies = useAppSelector(state => state.movies.nowPlaying);
-
 
   return (
     <>
@@ -22,7 +20,7 @@ export default function List() {
       <View style={{ flex: 1, padding: paddings.small, gap: paddings.medium }}>
         <View style={{ flexDirection: 'row', gap: paddings.small }}>
           <View style={{ width: '33%' }}>
-            <Molecules.UserList
+            <UserList
               onPress={() => {}}
               images={
                 nowPlayingMovies?.map(movie => lowResImage(movie.posterPath)).slice(0, 5) || []
@@ -31,10 +29,10 @@ export default function List() {
             />
           </View>
           <View style={{ width: '33%' }}>
-            <Atoms.AddUserList onPress={() => {}} />
+            <AddUserList onPress={() => {}} />
           </View>
         </View>
-        <Atoms.Label text='Friends Lists:' />
+        <PrimaryText>Friend List:</PrimaryText>
         <TouchableOpacity onPress={login}>
           <Text>Login</Text>
         </TouchableOpacity>

@@ -17,14 +17,14 @@ interface ITheme {
 }
 
 interface IUser {
-  userId:  string,
-  isPremium : boolean,
-  isAdmin : boolean,
-  rollbackId :  string,
-  avatarId : number,
-  language :  string,
-  userName :  string ,
-  createdAt :  string ,
+  userId: string;
+  isPremium: boolean;
+  isAdmin: boolean;
+  rollbackId: string;
+  avatarId: number;
+  language: string;
+  userName: string;
+  createdAt: string;
 }
 
 interface IMovie {

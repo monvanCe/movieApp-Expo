@@ -1,1 +1,26 @@
-export const loginAndRegister = '/user/login';
+//user endpoints
+export const sendUserLogin = '/user/login';
+export const sendUserUpdate = '/user/update';
+export const sendFriendshipRequest = '/friendship/create';
+export const getAllRequests = '/request/all';
+export const getProfile = '/user/profile?id=';
+export const getFriends = '/friendship';
+export const getSearchedUsers = '/user/find?search=';
+export const getReceivedRequests = '/requests';
+export const getSendedRequests = '/requests/send';
+export const getPendingRequests = '/requests/pending';
+
+//movie endpoints
+export const sendAddAndUpdateMovieUserList = '/movie/add';
+export const sendFriendAddMovieRequest = '/movies/friendship/add';
+export const sendFriendAnswerMovieRequest = '/movies/friendship/request';
+export const sendFriendMovieUpdate = '/movies/friendship/movie';
+export const delFriendMovie = '/friendship/movie?id=';
+export const getUserWatched = '/movies/watched';
+export const getUserWatchlist = '/movies/towatched';
+export const getFriendWatched = '/movies/friendship/watched?Id=';
+export const getFriendWatchlist = '/movies/friendship/towatched?Id=';
+export const delUserMovie = '/movies/remove';
+
+//app config endpoints
+export const getConfigList = '/appConfig';

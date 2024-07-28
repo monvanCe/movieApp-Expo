@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import Atoms from '@components/atoms';
+import IconButton from '@components/atoms/iconbutton';
 import { paddings } from '@styles/sizes';
 import theme from '@styles/theme';
 
@@ -73,7 +73,7 @@ export default function CustomModal({
             }}>
             <View style={style.iconButtonContainer}>
               <View style={style.modalSlider} />
-              <Atoms.IconButton icon='close' onPress={onPress} />
+              <IconButton icon='close' onPress={onPress} />
             </View>
             {children}
           </View>

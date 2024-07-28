@@ -14,3 +14,11 @@ export enum movieTypes {
   topRated = 'topRated',
   upComing = 'upComing',
 }
+
+export enum requestTypes {
+  send,
+  accept,
+  reject,
+  cancelled,
+  removing,
+}

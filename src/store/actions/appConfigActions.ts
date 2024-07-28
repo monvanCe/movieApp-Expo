@@ -1,7 +1,7 @@
+import { appTheme, storageKeys } from '@const/enums';
 import i18n from '@localization/index';
 import { setAppLanguage, setAppTheme } from '@store/slices/appConfigSlice';
 import { store } from '@store/store';
-import { appTheme, storageKeys } from '@utils/enums';
 import storage from '@utils/storage';
 import { getLocales } from 'expo-localization';
 import * as Updates from 'expo-updates';

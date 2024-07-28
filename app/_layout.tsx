@@ -5,10 +5,10 @@ import 'react-native-reanimated';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 
+import { appTheme } from '@const/enums';
 import { loadLanguage, loadTheme } from '@store/actions/appConfigActions';
 import { store, useAppSelector } from '@store/store';
 import Theme, { themes } from '@styles/theme';
-import { appTheme } from '@utils/enums';
 import { SplashScreen } from 'expo-router';
 import { Stack } from 'expo-router';
 
