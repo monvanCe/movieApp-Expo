@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "movieApp",
-    "slug": "movieApp",
+    "name": "movieIt",
+    "slug": "movieIt",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,29 +10,23 @@
       "resizeMode": "contain",
       "backgroundColor": "#000"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.monvance.movieApp"
+      "bundleIdentifier": "com.monvance.movieIt"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.monvance.movieApp"
+      "package": "com.monvance.movieIt"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-router",
-      "expo-localization",
-      "expo-secure-store"
-    ],
+    "plugins": ["expo-router", "expo-localization", "expo-secure-store"],
     "scheme": "your-app-scheme",
     "extra": {
       "router": {

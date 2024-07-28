@@ -11,6 +11,7 @@ const apiKey = state.appConfig.externalApiKey;
 const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
+    Authorization: `Bearer ${apiKey}`,
   },
   params: {
     api_key: apiKey,

@@ -7,12 +7,19 @@ export const useAuth = () => {
   const login = async () => {
     const userUniqueKey = await getItemAsync('userUniqueKey');
     const platform = Platform.OS === 'ios' ? 'IOS' : 'ANDROID';
-    const now = userUniqueKey ? userUniqueKey : Date.now();
+    const uniqueKey = userUniqueKey ? userUniqueKey : Date.now();
+    const appVersion = Number(process.env.EXPO_PUBLIC_APP_VERSION) || 1;
+
     if (!userUniqueKey) {
-      await setItemAsync('userUniqueKey', now.toString());
+      await setItemAsync('userUniqueKey', uniqueKey.toString());
     }
     try {
-      const response = await loginService(now.toString(), platform, '123', 1);
+      const response = await loginService(
+        uniqueKey.toString(),
+        platform,
+        'notificationId',
+        appVersion
+      );
     } catch (error) {
       throw error;
     }

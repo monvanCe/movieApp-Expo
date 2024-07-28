@@ -6,6 +6,7 @@ export enum appTheme {
 export enum storageKeys {
   appTheme = 'appTheme',
   appLanguage = 'appLanguage',
+  auth = 'auth',
 }
 
 export enum movieTypes {
