@@ -13,6 +13,8 @@ import {
   addFriend,
   addUserWatched,
   addUserWatchlist,
+  removeUserWatched,
+  removeUserWatchlist,
   setFriendWatched,
   setFriendWatchlist,
 } from '@store/slices/moviesSlice';
@@ -58,7 +60,6 @@ export default function useMovies() {
 
     try {
       const response = await getFriendsService();
-      console.log('response', response);
       response.forEach(async (friend: any) => {
         const friendWatchlist = await getFriendWatchlistService(friend._id);
         const friendWatched = await getFriendWatchedMoviesService(friend._id);
@@ -95,6 +96,7 @@ export default function useMovies() {
         movieId: movie.id.toString(),
         type: 'towatched',
       });
+      dispatch(removeUserWatched(movie.id));
       dispatch(addUserWatchlist(movie));
       return response;
     } catch (error) {
@@ -108,6 +110,7 @@ export default function useMovies() {
         movieId: movie.id.toString(),
         type: 'watched',
       });
+      dispatch(removeUserWatchlist(movie.id));
       dispatch(addUserWatched(movie));
       return response;
     } catch (error) {

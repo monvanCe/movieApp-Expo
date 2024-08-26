@@ -41,6 +41,15 @@ export default function AppLayout() {
           }}
         />
         <Tabs.Screen
+          name='notifications'
+          options={{
+            title: i18n.t('notifications'),
+            tabBarIcon: ({ color }) => (
+              <Ionicons name='notifications' size={fontSizes.large} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name='search'
           options={{
             title: i18n.t('search'),

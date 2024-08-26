@@ -2,7 +2,7 @@
 export const sendUserLogin = '/user/login';
 export const sendUserUpdate = '/user/update';
 export const sendFriendshipRequest = '/friendship/create';
-export const getAllRequests = '/request/all';
+export const getAllRequests = '/requests/all';
 export const getProfile = '/user/profile?id=';
 export const getFriends = '/friendship';
 export const getSearchedUsers = '/user/find?search=';

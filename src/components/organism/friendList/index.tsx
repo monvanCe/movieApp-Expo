@@ -59,6 +59,7 @@ export default function Friendlist() {
         renderItem={({ item, index }: { item: any; index: number }) => (
           <PrimaryText>{item.name}</PrimaryText>
         )}
+        estimatedItemSize={20}
       />
       <CustomModal visible={isToggle} onPress={close} height={'100%'}>
         <TextInput
@@ -80,9 +81,10 @@ export default function Friendlist() {
           data={users}
           renderItem={({ item, index }: { item: any; index: number }) => (
             <TouchableOpacity onPress={() => sendFriendshipRequest(item._id)}>
-              <PrimaryText>{item.name}</PrimaryText>
+              <PrimaryText>{item.userName}</PrimaryText>
             </TouchableOpacity>
           )}
+          estimatedItemSize={20}
         />
       </CustomModal>
     </View>
