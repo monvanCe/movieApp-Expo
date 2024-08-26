@@ -100,7 +100,6 @@ export const moviesSlice = createSlice({
         list.movies = list.movies.filter(movie => movie.id !== action.payload.movieId);
       }
     },
-
     addFriend: (state, action: PayloadAction<{ id: number; name: string }>) => {
       state.friends.push({
         id: action.payload.id,

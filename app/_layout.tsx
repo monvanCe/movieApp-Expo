@@ -6,17 +6,27 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 
 import { appTheme } from '@const/enums';
-import { loadLanguage, loadTheme } from '@store/actions/appConfigActions';
+import { useAuth } from '@hooks/useAuth';
+import { loadAppConfig, loadLanguage, loadTheme } from '@store/actions/appConfigActions';
 import { store, useAppSelector } from '@store/store';
 import Theme, { themes } from '@styles/theme';
-import { SplashScreen } from 'expo-router';
+import { setGlobalConfig } from 'axios-logger';
+import { SplashScreen, router } from 'expo-router';
 import { Stack } from 'expo-router';
 
 SplashScreen.preventAutoHideAsync();
 
+setGlobalConfig({
+  status: false,
+  headers: true,
+  params: true,
+});
+
 function AppLayout() {
+  const { loadUser } = useAuth();
   const currentTheme = useAppSelector(state => state.appConfig.appTheme);
   const colors = themes[currentTheme];
+  const [isAppLoaded, setIsAppLoaded] = React.useState(false);
 
   React.useEffect(() => {
     requestAnimationFrame(() => {
@@ -26,14 +36,21 @@ function AppLayout() {
 
   React.useEffect(() => {
     const loadApp = async () => {
+      await loadUser();
       await loadTheme();
       await loadLanguage();
+      await loadAppConfig();
     };
 
     loadApp().then(() => {
+      setIsAppLoaded(true);
       SplashScreen.hideAsync();
     });
   }, []);
+
+  if (!isAppLoaded) {
+    return null;
+  }
 
   return (
     <Theme.ThemeProvider theme={colors}>

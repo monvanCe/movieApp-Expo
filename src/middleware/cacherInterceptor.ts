@@ -1,14 +1,15 @@
 import storage from '@utils/storage';
 
-const whitelistPatterns = [/^\/movie\/\d+$/, /^\/person\/\d+$/];
+const whitelistPatterns = [/^\/3\/movie\/\d+$/, /^\/3\/person\/\d+$/];
 
 export const cacherInterceptor = (axiosInstance: any) => {
   axiosInstance.interceptors.request.use(async (config: any) => {
-    const url = new URL(config.url);
-    if (whitelistPatterns.some(pattern => pattern.test(url.pathname))) {
-      const cacheKey = `${config.url}-${JSON.stringify(config.params)}`;
-      const cachedResponse = await storage.getItem(cacheKey);
+    const urlPath = new URL(config.url).pathname;
 
+    if (whitelistPatterns.some(pattern => pattern.test(urlPath))) {
+      const cacheKey = `${config.url}-${JSON.stringify(config.params)}`;
+
+      const cachedResponse = await storage.getItem(cacheKey);
       if (cachedResponse) {
         config.adapter = async () => {
           return {
@@ -27,11 +28,8 @@ export const cacherInterceptor = (axiosInstance: any) => {
 
   axiosInstance.interceptors.response.use(
     async (response: any) => {
-      const url = new URL(response.config.url);
-      if (
-        whitelistPatterns.some(pattern => pattern.test(url.pathname)) &&
-        response.status === 200
-      ) {
+      const urlPath = new URL(response.config.url).pathname;
+      if (whitelistPatterns.some(pattern => pattern.test(urlPath)) && response.status === 200) {
         const cacheKey = `${response.config.url}-${JSON.stringify(response.config.params)}`;
         await storage.setItem(cacheKey, JSON.stringify(response.data));
       }

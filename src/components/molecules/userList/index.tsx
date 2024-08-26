@@ -17,7 +17,7 @@ export default function UserList({ images, text, onPress }: props) {
       <View style={{ width: '100%', aspectRatio: 2 }}>
         <ImageStack images={images} />
       </View>
-      <SecondaryText numberOfLines={2} style={style.text}>
+      <SecondaryText numberOfLines={1} style={style.text}>
         {text}
       </SecondaryText>
     </TouchableOpacity>

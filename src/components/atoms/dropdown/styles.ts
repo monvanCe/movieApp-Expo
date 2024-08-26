@@ -32,7 +32,7 @@ export const styles = (colors: ITheme) => {
       left: 0,
       right: 0,
       borderWidth: borderWidths.small,
-      borderColor: colors.border,
+      borderColor: colors.divider,
       borderRadius: borderRadius.small,
       backgroundColor: colors.surface,
       paddingHorizontal: metricEngine.horizontalScale(paddings.small),

@@ -7,6 +7,7 @@ import {
   PanResponder,
   PanResponderGestureState,
   Platform,
+  ScrollView,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -63,6 +64,7 @@ export default function CustomModal({
           style={{ flex: 1, backgroundColor: 'black', opacity: 0.1 }}
           onPress={onPress}
         />
+
         <View {...pandResponser.panHandlers} style={style.modalContainer}>
           <View
             style={{

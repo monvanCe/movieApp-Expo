@@ -1,9 +1,13 @@
 import { Platform } from 'react-native';
 
+import { storageKeys } from '@const/enums';
 import { loginService } from '@service/internalServices';
-import { getItemAsync, setItemAsync } from 'expo-secure-store';
+import { setCurrentUser } from '@store/slices/authSlice';
+import { useAppDispatch } from '@store/store';
+import { getItemAsync, setItem, setItemAsync } from 'expo-secure-store';
 
 export const useAuth = () => {
+  const dispatch = useAppDispatch();
   const login = async () => {
     const userUniqueKey = await getItemAsync('userUniqueKey');
     const platform = Platform.OS === 'ios' ? 'IOS' : 'ANDROID';
@@ -20,10 +24,24 @@ export const useAuth = () => {
         'notificationId',
         appVersion
       );
+
+      const user = { ...response.user, token: response.token };
+
+      setItem(storageKeys.auth, JSON.stringify(user));
+      dispatch(setCurrentUser(user));
     } catch (error) {
       throw error;
     }
   };
 
-  return { login };
+  const loadUser = async () => {
+    const user: any = await getItemAsync(storageKeys.auth);
+    if (user) {
+      dispatch(setCurrentUser(JSON.parse(user)));
+    } else {
+      await login();
+    }
+  };
+
+  return { login, loadUser };
 };

@@ -4,7 +4,7 @@ import axiosInstance from './axiosConfig';
 
 const getBaseURL = (type: string) => {
   const state = store.getState();
-  return type === 'internal' ? process.env.EXPO_PUBLIC_API_URL : state.appConfig.externalURL;
+  return type === 'internal' ? process.env.EXPO_PUBLIC_BASE_URL : state.appConfig.externalURL;
 };
 
 export const getRequest = async (type: string, endpoint: string, params = {}) => {
