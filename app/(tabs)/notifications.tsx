@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Text, Touchable, View } from 'react-native';
 
 import PrimaryText from '@components/atoms/primary-text';
 import { Ionicons } from '@expo/vector-icons';
-import useRequest from '@hooks/useRequest';
+import useUser from '@hooks/useUser';
 import { FlashList } from '@shopify/flash-list';
 import { useAppSelector } from '@store/store';
 import { borderRadius, borderWidths, paddings } from '@styles/sizes';
@@ -13,7 +13,12 @@ export default function Profile() {
   const userId = useAppSelector(state => state.auth.currentUser?._id);
   const colors = theme.useTheme();
   const [requests, setRequests] = useState([]);
-  const { getAllRequests } = useRequest();
+  const {
+    getAllRequests,
+    acceptFriendshipRequest,
+    rejectFriendshipRequest,
+    cancelFriendshipRequest,
+  } = useUser();
 
   useEffect(() => {
     getAllRequests().then(setRequests);
@@ -57,8 +62,20 @@ export default function Profile() {
     return item.to._id === userId;
   };
 
+  const isSent = (item: any) => {
+    if (item.status !== 'send') return false;
+
+    return item.from._id === userId;
+  };
+
   return (
     <View style={{ flex: 1 }}>
+      <Ionicons
+        name='reload'
+        size={24}
+        color={colors.primary}
+        onPress={() => getAllRequests().then(setRequests)}
+      />
       <FlashList
         data={requests}
         renderItem={({ item, index }: { item: any; index: number }) => (
@@ -80,8 +97,28 @@ export default function Profile() {
             </View>
             {isReceived(item) && (
               <>
-                <Ionicons name='checkmark-circle' size={32} color={colors.success} />
-                <Ionicons name='close-circle' size={32} color={colors.error} />
+                <Ionicons
+                  name='checkmark-circle'
+                  size={32}
+                  color={colors.success}
+                  onPress={() => acceptFriendshipRequest(item._id)}
+                />
+                <Ionicons
+                  name='close-circle'
+                  size={32}
+                  color={colors.error}
+                  onPress={() => rejectFriendshipRequest(item._id)}
+                />
+              </>
+            )}
+            {isSent(item) && (
+              <>
+                <Ionicons
+                  name='close-circle'
+                  size={32}
+                  color={colors.error}
+                  onPress={() => cancelFriendshipRequest(item._id)}
+                />
               </>
             )}
           </View>

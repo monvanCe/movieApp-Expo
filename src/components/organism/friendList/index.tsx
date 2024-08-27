@@ -4,8 +4,8 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 import PrimaryText from '@components/atoms/primary-text';
 import CustomModal from '@components/molecules/customModal';
 import { Ionicons } from '@expo/vector-icons';
-import useMovies from '@hooks/useMovies';
 import useToggle from '@hooks/useToggle';
+import useUser from '@hooks/useUser';
 import { FlashList } from '@shopify/flash-list';
 import { useAppSelector } from '@store/store';
 import { paddings } from '@styles/sizes';
@@ -15,7 +15,7 @@ export default function Friendlist() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const friends = useAppSelector(state => state.movies.friends);
-  const { loadFriends, searchUsers, sendFriendshipRequest } = useMovies();
+  const { loadFriends, searchUsers, sendFriendshipRequest } = useUser();
   const { toggle, isToggle, close } = useToggle();
   const colors = theme.useTheme();
 

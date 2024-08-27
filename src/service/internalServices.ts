@@ -42,6 +42,15 @@ export const sendFriendshipRequestService = async (friendId: string) => {
   }
 };
 
+export const sendFriendshipAnswerService = async (requestData: object) => {
+  try {
+    const response = await postRequest('internal', endPoints.sendFriendshipAnswer, requestData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getAllRequestsService = async () => {
   try {
     const response = await getRequest('internal', endPoints.getAllRequests);

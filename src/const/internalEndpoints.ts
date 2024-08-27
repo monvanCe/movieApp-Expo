@@ -9,6 +9,7 @@ export const getSearchedUsers = '/user/find?search=';
 export const getReceivedRequests = '/requests';
 export const getSendedRequests = '/requests/send';
 export const getPendingRequests = '/requests/pending';
+export const sendFriendshipAnswer = '/requests/answer';
 
 //movie endpoints
 export const sendAddAndUpdateMovieUserList = '/movies/add';
