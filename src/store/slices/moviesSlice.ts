@@ -15,7 +15,9 @@ interface moviesState {
     }[];
   };
   friends: {
-    id: number;
+    avatar: string;
+    friendshipId: string;
+    id: string;
     name: string;
     watchlist: IMovie[];
     watched: IMovie[];
@@ -100,45 +102,50 @@ export const moviesSlice = createSlice({
         list.movies = list.movies.filter(movie => movie.id !== action.payload.movieId);
       }
     },
-    addFriend: (state, action: PayloadAction<{ id: number; name: string }>) => {
+    addFriend: (
+      state,
+      action: PayloadAction<{ id: string; name: string; friendshipId: string; avatar: string }>
+    ) => {
       state.friends.push({
         id: action.payload.id,
         name: action.payload.name,
         watchlist: [],
         watched: [],
+        friendshipId: action.payload.friendshipId,
+        avatar: action.payload.avatar,
       });
     },
-    setFriendWatchlist: (state, action: PayloadAction<{ id: number; movies: IMovie[] }>) => {
+    setFriendWatchlist: (state, action: PayloadAction<{ id: string; movies: IMovie[] }>) => {
       const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watchlist = action.payload.movies;
       }
     },
-    addFriendWatchlist: (state, action: PayloadAction<{ id: number; movie: IMovie }>) => {
+    addFriendWatchlist: (state, action: PayloadAction<{ id: string; movie: IMovie }>) => {
       const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watchlist.push(action.payload.movie);
       }
     },
-    removeFriendWatchlist: (state, action: PayloadAction<{ id: number; movieId: number }>) => {
+    removeFriendWatchlist: (state, action: PayloadAction<{ id: string; movieId: number }>) => {
       const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watchlist = friend.watchlist.filter(movie => movie.id !== action.payload.movieId);
       }
     },
-    setFriendWatched: (state, action: PayloadAction<{ id: number; movies: IMovie[] }>) => {
+    setFriendWatched: (state, action: PayloadAction<{ id: string; movies: IMovie[] }>) => {
       const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watched = action.payload.movies;
       }
     },
-    addFriendWatched: (state, action: PayloadAction<{ id: number; movie: IMovie }>) => {
+    addFriendWatched: (state, action: PayloadAction<{ id: string; movie: IMovie }>) => {
       const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watched.push(action.payload.movie);
       }
     },
-    removeFriendWatched: (state, action: PayloadAction<{ id: number; movieId: number }>) => {
+    removeFriendWatched: (state, action: PayloadAction<{ id: string; movieId: number }>) => {
       const friend = state.friends.find(f => f.id === action.payload.id);
       if (friend) {
         friend.watched = friend.watched.filter(movie => movie.id !== action.payload.movieId);

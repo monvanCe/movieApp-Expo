@@ -67,7 +67,7 @@ interface ITexts {
 }
 
 interface IOnPressWithParam {
-  onPress: (param: string) => void;
+  onPress: (param: any) => void;
 }
 
 interface IMovies {

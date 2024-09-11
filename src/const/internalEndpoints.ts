@@ -9,7 +9,9 @@ export const getSearchedUsers = '/user/find?search=';
 export const getReceivedRequests = '/requests';
 export const getSendedRequests = '/requests/send';
 export const getPendingRequests = '/requests/pending';
-export const sendFriendshipAnswer = '/requests/answer';
+export const sendAnswerRequest = '/requests/answer?id=';
+export const sendCancelRequest = '/requests/cancel?id=';
+export const sendDeleteFriend = '/friendship?id=';
 
 //movie endpoints
 export const sendAddAndUpdateMovieUserList = '/movies/add';

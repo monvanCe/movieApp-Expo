@@ -14,7 +14,8 @@
       "@service/*": ["service/*"],
       "@store/*": ["store/*"],
       "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"]
     }
   }
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Dimensions, FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import CustomModal from '@components/molecules/customModal';
+import MovieList from '@components/molecules/movieList';
 import UserList from '@components/molecules/userList';
 import { highResImage, lowResImage } from '@const/imageSources';
 import { Ionicons } from '@expo/vector-icons';
@@ -18,7 +19,7 @@ const { width } = Dimensions.get('window');
 export default function UserLists() {
   const [modalContent, setModalContent] = useState<number>(0);
   const [selectedMovie, setSelectedMovie] = useState<IMovie | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+
   const { toggle, isToggle } = useToggle();
   const { loadUserWatchList, loadUserWatched } = useMovies();
   const userWatchlist = useAppSelector(state => state.movies.user.watchlist);
@@ -32,38 +33,6 @@ export default function UserLists() {
     loadUserWatched();
   }, []);
 
-  const renderMovieList = () => (
-    <FlashList
-      numColumns={3}
-      data={modalContent === 0 ? userWatchlist : userWatched}
-      keyExtractor={item => item.id.toString()}
-      renderItem={({ item }: { item: IMovie }) => (
-        <TouchableOpacity
-          onPress={() => {
-            setSelectedMovie(item);
-            flatListRef.current?.scrollToIndex({ index: 1 });
-            setCurrentPage(1);
-          }}
-          style={{
-            borderWidth: borderWidths.small,
-            borderRadius: borderRadius.small,
-            borderColor: colors.divider,
-            margin: '1%',
-            overflow: 'hidden',
-          }}>
-          <Image
-            source={{ uri: lowResImage(item.posterPath) }}
-            style={{
-              width: '100%',
-              aspectRatio: 9 / 13.5,
-            }}
-          />
-        </TouchableOpacity>
-      )}
-      estimatedItemSize={100}
-    />
-  );
-
   const renderMovieDetail = () => (
     <View style={{ flex: 1 }}>
       {selectedMovie && (
@@ -71,7 +40,6 @@ export default function UserLists() {
           <TouchableOpacity
             onPress={() => {
               flatListRef.current?.scrollToIndex({ index: 0 });
-              setCurrentPage(0);
             }}>
             <Ionicons
               name='chevron-back'
@@ -118,7 +86,6 @@ export default function UserLists() {
           images={watchListImages}
           text='İzlenecekler'
           onPress={() => {
-            console.log(watchListImages);
             setModalContent(0);
             toggle();
           }}
@@ -145,7 +112,17 @@ export default function UserLists() {
             data={[{ key: 'list' }, { key: 'details' }]}
             renderItem={({ item }) => (
               <View style={{ width: width - 2 * paddings.medium }}>
-                {item.key === 'list' ? renderMovieList() : renderMovieDetail()}
+                {item.key === 'list' ? (
+                  <MovieList
+                    movies={modalContent === 0 ? userWatchlist : userWatched}
+                    onPress={movie => {
+                      setSelectedMovie(movie);
+                      flatListRef.current?.scrollToIndex({ index: 1 });
+                    }}
+                  />
+                ) : (
+                  renderMovieDetail()
+                )}
               </View>
             )}
           />

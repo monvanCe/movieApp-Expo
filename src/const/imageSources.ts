@@ -1,8 +1,17 @@
-export const lowResImage = (path: string) => `https://image.tmdb.org/t/p/w200${path}`;
+export const lowResImage = (path: string) =>
+  path
+    ? `https://image.tmdb.org/t/p/w200${path}`
+    : 'https://storage.googleapis.com/movielt/assets/empty-movie.png';
 
-export const highResImage = (path: string) => `https://image.tmdb.org/t/p/w500${path}`;
+export const highResImage = (path: string) =>
+  path
+    ? `https://image.tmdb.org/t/p/w500${path}`
+    : 'https://storage.googleapis.com/movielt/assets/empty-movie.png';
 
-export const originalImage = (path: string) => `https://image.tmdb.org/t/p/original${path}`;
+export const originalImage = (path: string) =>
+  path
+    ? `https://image.tmdb.org/t/p/original${path}`
+    : 'https://storage.googleapis.com/movielt/assets/empty-movie.png';
 
 export default {
   lowResImage,

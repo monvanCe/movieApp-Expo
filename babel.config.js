@@ -15,6 +15,7 @@ const MODULE_RESOLVER = [
       '@store': './src/store',
       '@styles': './src/styles',
       '@utils': './src/utils',
+      '@assets': './src/assets',
     },
   },
 ];

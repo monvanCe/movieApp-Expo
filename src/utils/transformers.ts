@@ -7,7 +7,7 @@ export const movieDataTransformer = (movie: any) => ({
   originalTitle: movie.original_title,
   overview: movie.overview,
   popularity: movie.popularity,
-  posterPath: movie.poster_path || '',
+  posterPath: movie.poster_path || 'ss',
   releaseDate: movie.release_date,
   title: movie.title,
   video: movie.video,

@@ -9,7 +9,7 @@ export default function SecondaryText(props: TextProps) {
   return (
     <Text
       {...props}
-      style={[{ fontSize: fontSizes.medium, color: colors.secondaryText }, props.style]}>
+      style={[{ fontSize: fontSizes.medium, color: colors.tertiaryText }, props.style]}>
       {props.children}
     </Text>
   );

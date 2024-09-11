@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, FlatList, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
-import Dropdown from '@components/atoms/dropdown';
 import SearchButton from '@components/atoms/searchButton';
+import SecondaryText from '@components/atoms/secondary-text';
 import CustomModal from '@components/molecules/customModal';
 import BannerMovies from '@components/organism/bannerMovies';
 import { highResImage, lowResImage } from '@const/imageSources';
@@ -12,11 +12,13 @@ import useToggle from '@hooks/useToggle';
 import { searchMovies } from '@service/externalServices';
 import { FlashList } from '@shopify/flash-list';
 import { useAppSelector } from '@store/store';
-import { borderRadius, fontSizes, margins, paddings } from '@styles/sizes';
+import { borderRadius, borderWidths, fontSizes, margins, paddings } from '@styles/sizes';
 import theme from '@styles/theme';
+import { Image } from 'expo-image';
 
 export default function Search() {
-  const { addMovieToWatchList, addMovieToWatched } = useMovies();
+  const user = useAppSelector(state => state.auth.currentUser);
+  const { addMovieToWatchList, addMovieToWatched, addMovieToFriendList } = useMovies();
   const [selectedItem, setSelectedItem] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchedMovies, setSearchedMovies] = useState([]);
@@ -27,15 +29,25 @@ export default function Search() {
   const [currentPage, setCurrentPage] = useState<number>(0);
   const width = Dimensions.get('window').width;
   const friends = useAppSelector(state => state.movies.friends);
-  const dropdownItems = [
-    { name: 'Watchlist', type: 0 },
-    { name: 'Watched', type: 1 },
-    ...friends.map(friend => ({ name: friend.name + 'watchlist', type: 2, id: friend.id })),
-    ...friends.map(friend => ({ name: friend.name + 'watched', type: 3, id: friend.id })),
+  const addItems = [
+    { name: user?.userName, type: 0, avatar: user?.avatarId },
+    { name: user?.userName, type: 1, avatar: user?.avatarId },
+    ...friends.map(friend => ({
+      name: friend.name,
+      type: 2,
+      id: friend.friendshipId,
+      avatar: friend.avatar,
+    })),
+    ...friends.map(friend => ({
+      name: friend.name,
+      type: 3,
+      id: friend.friendshipId,
+      avatar: friend.avatar,
+    })),
   ];
 
   useEffect(() => {
-    if (searchTerm.length < 3) {
+    if (searchTerm.length < 2) {
       setSearchedMovies([]);
       return;
     }
@@ -131,24 +143,30 @@ export default function Search() {
               {selectedMovie.title}
             </Text>
 
-            <TouchableOpacity onPress={handleAddButton}>
-              <Ionicons
-                name='add-circle'
-                size={30}
-                color={colors.primary}
-                style={{ marginLeft: 'auto', margin: paddings.medium }}
-              />
+            <TouchableOpacity
+              onPress={() => {
+                flatListRef.current?.scrollToIndex({ index: 2 });
+                setCurrentPage(2);
+              }}>
+              <View
+                style={{
+                  alignItems: 'center',
+                  marginTop: margins.medium,
+                  borderWidth: borderWidths.small,
+                  borderColor: colors.tertiaryText,
+                  borderRadius: borderRadius.medium,
+                  paddingHorizontal: paddings.medium,
+                  flexDirection: 'row',
+                }}>
+                <Ionicons
+                  name='add-circle'
+                  size={24}
+                  color={colors.primaryText}
+                  style={{ marginLeft: 'auto', margin: paddings.medium }}
+                />
+                <SecondaryText>Add</SecondaryText>
+              </View>
             </TouchableOpacity>
-            <View style={{ width: '33%' }}>
-              <Dropdown
-                text={selectedItem?.name}
-                texts={dropdownItems.map(item => item.name)}
-                onPress={(item: string) => {
-                  const selectedItem = dropdownItems.find(i => i.name === item);
-                  if (selectedItem) setSelectedItem(selectedItem);
-                }}
-              />
-            </View>
           </View>
           <Text
             style={{
@@ -163,6 +181,63 @@ export default function Search() {
     </View>
   );
 
+  const renderAddList = () => (
+    <View style={{ flex: 1 }}>
+      <TouchableOpacity
+        onPress={() => {
+          flatListRef.current?.scrollToIndex({ index: 1 });
+          setCurrentPage(1);
+        }}>
+        <Ionicons
+          name='chevron-back'
+          size={30}
+          color={colors.primary}
+          style={{ margin: paddings.medium }}
+        />
+      </TouchableOpacity>
+      <FlashList
+        data={addItems}
+        renderItem={({ item, index }: { item: any; index: number }) => (
+          <TouchableOpacity
+            onPress={() => {
+              setSelectedItem(item);
+              handleAddButton();
+            }}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginTop: index === 0 ? margins.small : 0,
+              borderWidth: borderWidths.small,
+              borderColor: colors.divider,
+              padding: paddings.medium,
+              borderRadius: borderRadius.medium,
+              marginVertical: margins.small,
+            }}>
+            <Image
+              source={{ uri: item.avatar }}
+              style={{
+                height: 50,
+                aspectRatio: 1,
+                marginRight: paddings.medium,
+              }}
+            />
+            <Text style={{ color: colors.primaryText, fontWeight: 'bold' }}>
+              {item.name === user?.userName ? item.name + '(You)' : item.name}
+            </Text>
+            <Ionicons
+              name={item.type === 0 || item.type === 2 ? 'add-circle' : 'checkmark-circle'}
+              size={24}
+              color={item.type === 0 || item.type === 2 ? colors.warning : colors.success}
+              style={{ marginLeft: 'auto' }}
+            />
+          </TouchableOpacity>
+        )}
+        keyExtractor={item => item.name + item.type.toString()}
+        estimatedItemSize={100}
+      />
+    </View>
+  );
+
   const handleAddButton = () => {
     if (!selectedMovie) return;
     if (!selectedItem) return;
@@ -172,6 +247,14 @@ export default function Search() {
 
     if (selectedItem?.type === 1) {
       addMovieToWatched(selectedMovie);
+    }
+
+    if (selectedItem?.type === 2) {
+      addMovieToFriendList(selectedItem.id, selectedMovie.id, 'towatched');
+    }
+
+    if (selectedItem?.type === 3) {
+      addMovieToFriendList(selectedItem.id, selectedMovie.id, 'watched');
     }
   };
 
@@ -202,10 +285,12 @@ export default function Search() {
             pagingEnabled
             showsHorizontalScrollIndicator={false}
             scrollEnabled
-            data={[{ key: 'list' }, { key: 'details' }]}
+            data={[{ key: 'list' }, { key: 'details' }, { key: 'add' }]}
             renderItem={({ item }) => (
               <View style={{ width: width - 2 * paddings.medium }}>
-                {item.key === 'list' ? renderMovieList() : renderMovieDetail()}
+                {item.key === 'list' && renderMovieList()}
+                {item.key === 'details' && renderMovieDetail()}
+                {item.key === 'add' && renderAddList()}
               </View>
             )}
           />

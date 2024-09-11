@@ -42,9 +42,21 @@ export const sendFriendshipRequestService = async (friendId: string) => {
   }
 };
 
-export const sendFriendshipAnswerService = async (requestData: object) => {
+export const sendAnswerRequestService = async (
+  id: string,
+  status: 'accept' | 'reject' | 'cancelled' | 'removing'
+) => {
   try {
-    const response = await postRequest('internal', endPoints.sendFriendshipAnswer, requestData);
+    if (status === 'removing') {
+      var response = await deleteRequest('internal', `${endPoints.sendDeleteFriend}${id}`);
+      return response;
+    } else if (status === 'cancelled') {
+      var response = await deleteRequest('internal', `${endPoints.sendCancelRequest}${id}`);
+      return response;
+    } else {
+      var response = await postRequest('internal', endPoints.sendAnswerRequest + id, { status });
+    }
+
     return response;
   } catch (error) {
     throw error;
@@ -128,9 +140,17 @@ export const addOrUpdateMovieService = async (movieData: object) => {
   }
 };
 
-export const sendFriendAddMovieRequestService = async (movieData: object) => {
+export const sendFriendAddMovieRequestService = async (
+  friendShipId: string,
+  movieId: number,
+  type: 'towatched' | 'watched'
+) => {
   try {
-    const response = await postRequest('internal', endPoints.sendFriendAddMovieRequest, movieData);
+    const response = await postRequest('internal', endPoints.sendFriendAddMovieRequest, {
+      friendShipId,
+      movieId: movieId.toString(),
+      type,
+    });
     return response;
   } catch (error) {
     throw error;

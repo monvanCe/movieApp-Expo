@@ -3,6 +3,8 @@ import {
   addOrUpdateMovieService,
   getUserWatchedMoviesService,
   getUserWatchlistService,
+  sendFriendAddMovieRequestService,
+  sendFriendAnswerMovieRequestService,
 } from '@service/internalServices';
 import {
   addUserWatched,
@@ -73,11 +75,47 @@ export default function useMovies() {
     }
   };
 
+  const addMovieToFriendList = async (
+    friendShipId: string,
+    movieId: number,
+    type: 'towatched' | 'watched'
+  ) => {
+    try {
+      const response = await sendFriendAddMovieRequestService(friendShipId, movieId, type);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const answerFriendMovieRequest = async (
+    RequestId: string,
+    status: 'accept' | 'reject' | 'cancelled'
+  ) => {
+    try {
+      const response = await sendFriendAnswerMovieRequestService({ RequestId, status });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const getMovie = async (movieId: number) => {
+    try {
+      const response = await fetchMovieDetail(movieId);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return {
     loadUserWatchList,
     loadUserWatched,
-
     addMovieToWatchList,
     addMovieToWatched,
+    addMovieToFriendList,
+    getMovie,
+    answerFriendMovieRequest,
   };
 }

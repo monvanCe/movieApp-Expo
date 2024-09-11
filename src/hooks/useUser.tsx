@@ -1,16 +1,21 @@
+import { sendAnswerRequest } from '@const/internalEndpoints';
 import {
   getAllRequestsService,
   getFriendWatchedMoviesService,
   getFriendWatchlistService,
   getFriendsService,
   getSearchedUsersService,
-  sendFriendshipAnswerService,
+  sendAnswerRequestService,
   sendFriendshipRequestService,
 } from '@service/internalServices';
 import { addFriend, setFriendWatched, setFriendWatchlist } from '@store/slices/moviesSlice';
 import { store } from '@store/store';
+import { get } from 'http';
+
+import useMovies from './useMovies';
 
 export default function useUser() {
+  const { getMovie } = useMovies();
   const dispatch = store.dispatch;
   const getAllRequests = async () => {
     try {
@@ -41,7 +46,7 @@ export default function useUser() {
 
   const acceptFriendshipRequest = async (RequestId: string) => {
     try {
-      const response = await sendFriendshipAnswerService({ RequestId, status: 'accept' });
+      const response = await sendAnswerRequestService(RequestId, 'accept');
       return response;
     } catch (error) {
       throw error;
@@ -50,7 +55,7 @@ export default function useUser() {
 
   const rejectFriendshipRequest = async (RequestId: string) => {
     try {
-      const response = await sendFriendshipAnswerService({ RequestId, status: 'reject' });
+      const response = await sendAnswerRequestService(RequestId, 'reject');
       return response;
     } catch (error) {
       throw error;
@@ -59,10 +64,16 @@ export default function useUser() {
 
   const cancelFriendshipRequest = async (RequestId: string) => {
     try {
-      const response = await sendFriendshipAnswerService({
-        RequestId,
-        status: 'cancelled',
-      });
+      const response = await sendAnswerRequestService(RequestId, 'cancelled');
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const removeFriend = async (friendId: string) => {
+    try {
+      const response = await sendAnswerRequestService(friendId, 'removing');
       return response;
     } catch (error) {
       throw error;
@@ -79,9 +90,29 @@ export default function useUser() {
       response.forEach(async (friend: any) => {
         const friendWatchlist = await getFriendWatchlistService(friend._id);
         const friendWatched = await getFriendWatchedMoviesService(friend._id);
-        dispatch(addFriend({ id: friend.friends._id, name: friend.friends.userName }));
-        dispatch(setFriendWatchlist({ id: friend.friends._id, movies: friendWatchlist }));
-        dispatch(setFriendWatched({ id: friend.friends._id, movies: friendWatched }));
+        dispatch(
+          addFriend({
+            id: friend.friends._id,
+            name: friend.friends.userName,
+            friendshipId: friend._id,
+            avatar: friend.friends.avatarId,
+          })
+        );
+        const watchlistMovies = await Promise.all(
+          friendWatchlist.map(async (movie: any) => {
+            const res = await getMovie(movie.movieId);
+            return res;
+          })
+        );
+
+        const watchedMovies = await Promise.all(
+          friendWatched.map(async (movie: any) => {
+            const res = await getMovie(movie.movieId);
+            return res;
+          })
+        );
+        dispatch(setFriendWatchlist({ id: friend.friends._id, movies: watchlistMovies }));
+        dispatch(setFriendWatched({ id: friend.friends._id, movies: watchedMovies }));
       });
     } catch (error) {
       throw error;
@@ -96,5 +127,6 @@ export default function useUser() {
     acceptFriendshipRequest,
     rejectFriendshipRequest,
     cancelFriendshipRequest,
+    removeFriend,
   };
 }
