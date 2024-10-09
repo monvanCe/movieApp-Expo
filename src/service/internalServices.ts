@@ -24,7 +24,7 @@ export const loginService = async (
 
 export const updateUserService = async (userData: object) => {
   try {
-    const response = await postRequest('internal', endPoints.sendUserUpdate, userData);
+    const response = await putRequest('internal', endPoints.sendUserUpdate, userData);
     return response;
   } catch (error) {
     throw error;

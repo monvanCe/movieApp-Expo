@@ -23,7 +23,7 @@ setGlobalConfig({
 });
 
 function AppLayout() {
-  const { loadUser } = useAuth();
+  const { login } = useAuth();
   const currentTheme = useAppSelector(state => state.appConfig.appTheme);
   const colors = themes[currentTheme];
   const [isAppLoaded, setIsAppLoaded] = React.useState(false);
@@ -36,7 +36,7 @@ function AppLayout() {
 
   React.useEffect(() => {
     const loadApp = async () => {
-      await loadUser();
+      await login();
       await loadTheme();
       await loadLanguage();
       await loadAppConfig();

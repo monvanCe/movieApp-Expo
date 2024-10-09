@@ -5,14 +5,16 @@ import theme from '@styles/theme';
 
 import { styles } from './styles';
 
-interface props extends IText, IOnPress {}
+interface props extends IText, IOnPress {
+  overrideStyle?: any;
+}
 
-export default function Button({ text, onPress }: props) {
+export default function Button({ text, onPress, overrideStyle }: props) {
   const colors = theme.useTheme();
   const style = React.useMemo(() => styles(colors), [colors]);
 
   return (
-    <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity style={overrideStyle} onPress={onPress}>
       <Text style={style.text}>{text}</Text>
     </TouchableOpacity>
   );

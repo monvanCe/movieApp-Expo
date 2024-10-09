@@ -30,7 +30,7 @@ export const themes = {
     warning: '#F9A825',
     success: '#388E3C',
     info: '#1976D2',
-    border: '#333333',
+    border: '#4D4D4D',
     divider: '#484848',
     iconPrimary: '#BB86FC',
     iconSecondary: '#E0E0E0',

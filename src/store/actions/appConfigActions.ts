@@ -4,6 +4,7 @@ import { getConfigListService } from '@service/internalServices';
 import {
   setAppLanguage,
   setAppTheme,
+  setAvatars,
   setExternalApiKey,
   setExternalURL,
 } from '@store/slices/appConfigSlice';
@@ -55,7 +56,9 @@ export const loadAppConfig = async () => {
   const res = await getConfigListService();
   const externalUrl = res.find((item: any) => item.key === 'imdb_url')?.value;
   const externalApiKey = res.find((item: any) => item.key === 'imdb_key')?.value;
+  const avatars = res.find((item: any) => item.key === 'avatars')?.value;
 
+  dispatch(setAvatars(avatars));
   dispatch(setExternalURL(externalUrl));
   dispatch(setExternalApiKey(externalApiKey));
 };

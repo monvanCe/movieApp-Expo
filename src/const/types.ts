@@ -17,6 +17,7 @@ interface ITheme {
 }
 
 interface IUser {
+  [key: string]: any;
   _id: string;
   userId: string;
   isPremium: boolean;
@@ -27,6 +28,7 @@ interface IUser {
   userName: string;
   createdAt: string;
   token: string;
+  bio: string;
 }
 
 interface IMovie {

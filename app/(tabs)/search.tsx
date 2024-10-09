@@ -261,7 +261,15 @@ export default function Search() {
   return (
     <View style={{ flex: 1 }}>
       <SearchButton onPress={toggle} />
-      <BannerMovies />
+
+      <View
+        style={{
+          flex: 1,
+          marginTop: margins.small,
+        }}>
+        <BannerMovies />
+      </View>
+
       <CustomModal visible={isToggle} onPress={close} height={'100%'}>
         <TextInput
           style={{

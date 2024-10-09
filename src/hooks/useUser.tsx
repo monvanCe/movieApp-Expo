@@ -7,7 +7,9 @@ import {
   getSearchedUsersService,
   sendAnswerRequestService,
   sendFriendshipRequestService,
+  updateUserService,
 } from '@service/internalServices';
+import { setCurrentUser } from '@store/slices/authSlice';
 import { addFriend, setFriendWatched, setFriendWatchlist } from '@store/slices/moviesSlice';
 import { store } from '@store/store';
 import { get } from 'http';
@@ -119,6 +121,15 @@ export default function useUser() {
     }
   };
 
+  const updateUser = async (data: any) => {
+    try {
+      const response = await updateUserService(data);
+      dispatch(setCurrentUser(response));
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return {
     getAllRequests,
     searchUsers,
@@ -128,5 +139,6 @@ export default function useUser() {
     rejectFriendshipRequest,
     cancelFriendshipRequest,
     removeFriend,
+    updateUser,
   };
 }

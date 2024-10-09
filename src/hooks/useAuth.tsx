@@ -1,11 +1,9 @@
 import { Platform } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
-import { storageKeys } from '@const/enums';
 import { loginService } from '@service/internalServices';
 import { setCurrentUser } from '@store/slices/authSlice';
 import { useAppDispatch } from '@store/store';
-import storage from '@utils/storage';
 import 'expo-dev-client';
 
 export const useAuth = () => {
@@ -21,21 +19,11 @@ export const useAuth = () => {
 
       const user = { ...response.user, token: response.token };
 
-      storage.setItem(storageKeys.auth, JSON.stringify(user));
       dispatch(setCurrentUser(user));
     } catch (error) {
       throw error;
     }
   };
 
-  const loadUser = async () => {
-    const user = await storage.getItem(storageKeys.auth);
-    if (user) {
-      dispatch(setCurrentUser(JSON.parse(user)));
-    } else {
-      await login();
-    }
-  };
-
-  return { login, loadUser };
+  return { login };
 };

@@ -7,6 +7,7 @@ interface AppConfigState {
   externalApiKey: string | null;
   appTheme: appTheme;
   appLanguage: string;
+  avatars: string[];
 }
 
 const initialState: AppConfigState = {
@@ -14,6 +15,7 @@ const initialState: AppConfigState = {
   externalApiKey: '4f098a761153500ca2a6a2d39980f694',
   appTheme: appTheme.Dark,
   appLanguage: 'en',
+  avatars: [],
 };
 
 export const appConfigSlice = createSlice({
@@ -33,10 +35,13 @@ export const appConfigSlice = createSlice({
     setAppLanguage: (state, action: PayloadAction<string>) => {
       state.appLanguage = action.payload;
     },
+    setAvatars: (state, action: PayloadAction<string[]>) => {
+      state.avatars = action.payload;
+    },
   },
 });
 
-export const { setExternalURL, setAppTheme, setExternalApiKey, setAppLanguage } =
+export const { setExternalURL, setAppTheme, setExternalApiKey, setAppLanguage, setAvatars } =
   appConfigSlice.actions;
 
 export default appConfigSlice.reducer;
