@@ -12,7 +12,7 @@ interface AppConfigState {
 
 const initialState: AppConfigState = {
   externalURL: null,
-  externalApiKey: '4f098a761153500ca2a6a2d39980f694',
+  externalApiKey: '',
   appTheme: appTheme.Dark,
   appLanguage: 'en',
   avatars: [],

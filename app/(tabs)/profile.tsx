@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import Button from '@components/atoms/button';
@@ -27,6 +27,7 @@ export default function Profile() {
 
   const colors = theme.useTheme();
   const { toggle, isToggle } = useToggle();
+
   return (
     <View style={{ alignItems: 'center', flex: 1 }}>
       <PrimaryText>{user?.userName}</PrimaryText>
