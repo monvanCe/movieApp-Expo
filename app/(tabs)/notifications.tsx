@@ -13,7 +13,7 @@ import { borderRadius, borderWidths, paddings } from '@styles/sizes';
 import theme from '@styles/theme';
 import { Image } from 'expo-image';
 
-export default function Profile() {
+export default function NotificationScreen() {
   const userId = useAppSelector(state => state.auth.currentUser?._id);
   const colors = theme.useTheme();
   const [requests, setRequests] = useState<any>([]);
