@@ -3,7 +3,7 @@ import { store } from '@store/store';
 export const authInteceptor = (axios: any) => {
   axios.interceptors.request.use((config: any) => {
     const state = store.getState();
-    const isInternalUrl = config.url.includes('monvance');
+    const isInternalUrl = config.url.includes(process.env.EXPO_PUBLIC_BASE_URL as string);
     const token = isInternalUrl ? state.auth.currentUser?.token : state.appConfig.externalApiKey;
 
     if (isInternalUrl) {

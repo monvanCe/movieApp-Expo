@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 
 import { appTheme } from '@const/enums';
 import { useAuth } from '@hooks/useAuth';
+import useNotification from '@hooks/useNotification';
 import { loadAppConfig, loadLanguage, loadTheme } from '@store/actions/appConfigActions';
 import { store, useAppSelector } from '@store/store';
 import Theme, { themes } from '@styles/theme';
@@ -27,6 +28,7 @@ function AppLayout() {
   const currentTheme = useAppSelector(state => state.appConfig.appTheme);
   const colors = themes[currentTheme];
   const [isAppLoaded, setIsAppLoaded] = React.useState(false);
+  const { loadNotifications } = useNotification();
 
   React.useEffect(() => {
     requestAnimationFrame(() => {

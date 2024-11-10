@@ -1,57 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { View } from 'react-native';
 
 import PrimaryText from '@components/atoms/primary-text';
 import SecondaryText from '@components/atoms/secondary-text';
 import { lowResImage } from '@const/imageSources';
 import { Ionicons } from '@expo/vector-icons';
-import useMovies from '@hooks/useMovies';
-import useUser from '@hooks/useUser';
+import useNotification from '@hooks/useNotification';
 import { FlashList } from '@shopify/flash-list';
-import { useAppSelector } from '@store/store';
 import { borderRadius, borderWidths, paddings } from '@styles/sizes';
 import theme from '@styles/theme';
 import { Image } from 'expo-image';
 
 export default function NotificationScreen() {
-  const userId = useAppSelector(state => state.auth.currentUser?._id);
   const colors = theme.useTheme();
-  const [requests, setRequests] = useState<any>([]);
-
   const {
-    getAllRequests,
+    notifications,
+    loadNotifications,
+    userId,
     acceptFriendshipRequest,
     rejectFriendshipRequest,
     cancelFriendshipRequest,
-  } = useUser();
-
-  const { answerFriendMovieRequest } = useMovies();
-
-  const { getMovie } = useMovies();
-
-  const loadRequests = () => {
-    getAllRequests().then(requests => {
-      const newRequests = requests.map(async (request: any) => {
-        if (request.type === 'friendshipMovies') {
-          const movie = await getMovie(request.movie);
-          return { ...request, image: movie.posterPath, subTitle: movie.title };
-        }
-
-        if (request.type === 'friendship') {
-          const image = request.from._id === userId ? request.to.avatarId : request.from.avatarId;
-
-          return { ...request, image, subTitle: 'Friendship request' };
-        }
-
-        return request;
-      });
-
-      Promise.all(newRequests).then(setRequests);
-    });
-  };
+    answerFriendMovieRequest,
+  } = useNotification();
 
   useEffect(() => {
-    loadRequests();
+    loadNotifications();
   }, []);
 
   const colorRenderer = (type: string) => {
@@ -106,10 +79,10 @@ export default function NotificationScreen() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Ionicons name='reload' size={24} color={colors.primary} onPress={loadRequests} />
+      <Ionicons name='reload' size={24} color={colors.primary} onPress={loadNotifications} />
 
       <FlashList
-        data={requests}
+        data={notifications}
         renderItem={({ item, index }: { item: any; index: number }) => (
           <View
             style={{

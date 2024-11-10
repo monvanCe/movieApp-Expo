@@ -87,3 +87,9 @@ interface IVisible {
 interface IToken {
   token: string;
 }
+
+interface INotification {
+  id: string;
+  message: string;
+  type: 'success' | 'error' | 'info';
+}
