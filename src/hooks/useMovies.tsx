@@ -7,6 +7,8 @@ import {
   sendFriendAnswerMovieRequestService,
 } from '@service/internalServices';
 import {
+  addFriendWatched,
+  addFriendWatchlist,
   addUserWatched,
   addUserWatchlist,
   removeUserWatched,
@@ -90,10 +92,21 @@ export default function useMovies() {
 
   const answerFriendMovieRequest = async (
     RequestId: string,
-    status: 'accept' | 'reject' | 'cancelled'
+    status: 'accept' | 'reject' | 'cancelled',
+    movie: IMovie,
+    type: 'towatched' | 'watched'
   ) => {
     try {
       const response = await sendFriendAnswerMovieRequestService({ RequestId, status });
+
+      if (status === 'accept' && type === 'towatched') {
+        dispatch(addFriendWatchlist({ id: RequestId, movie: movie }));
+      }
+
+      if (status === 'accept' && type === 'watched') {
+        dispatch(addFriendWatched({ id: RequestId, movie: movie }));
+      }
+
       return response;
     } catch (error) {
       throw error;

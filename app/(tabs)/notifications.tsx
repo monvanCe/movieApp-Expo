@@ -125,7 +125,7 @@ export default function NotificationScreen() {
                   color={colors.success}
                   onPress={() =>
                     item.type === 'friendshipMovies'
-                      ? answerFriendMovieRequest(item._id, 'accept')
+                      ? answerFriendMovieRequest(item._id, 'accept', item.movie, item.movieType)
                       : acceptFriendshipRequest(item._id)
                   }
                 />
@@ -135,7 +135,7 @@ export default function NotificationScreen() {
                   color={colors.error}
                   onPress={() =>
                     item.type === 'friendshipMovies'
-                      ? answerFriendMovieRequest(item._id, 'reject')
+                      ? answerFriendMovieRequest(item._id, 'reject', item.movie, item.movieType)
                       : rejectFriendshipRequest(item._id)
                   }
                 />
@@ -149,7 +149,7 @@ export default function NotificationScreen() {
                   color={colors.error}
                   onPress={() => {
                     item.type === 'friendshipMovies'
-                      ? answerFriendMovieRequest(item._id, 'cancelled')
+                      ? answerFriendMovieRequest(item._id, 'cancelled', item.movie, item.movieType)
                       : cancelFriendshipRequest(item._id);
                   }}
                 />
